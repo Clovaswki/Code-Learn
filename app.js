@@ -54,7 +54,8 @@
             next()
         })
     //Conexao com o banco de dados MongoDB
-        mongoose.connect(process.env.MONGO_URI).then(() => {
+        const {mongoURI} = require('./config/db')
+        mongoose.connect(mongoURI).then(() => {
             console.log('MongoDB conectado...')
         }).catch((err) => {
             console.log(`Erro: ${err}`)
