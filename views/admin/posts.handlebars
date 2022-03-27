@@ -1,0 +1,40 @@
+{{>navbarAdmin}}
+<div class="card p-3">
+    {{>msg}}
+    <div class="my-3 p-3 bg-body rounded shadow-sm">
+        <div class="d-flex row p">
+            <div class="col">
+                <h6 class="pb-2 mb-0">Posts</h6>
+            </div>
+            <div class="col">
+                <form class="d-flex my-auto pb-2 mb-0 search" action="/admin/search-categorias" method="post">
+                    <input class="form-control me-2" type="search" placeholder="Nome do post" name="search" aria-label="Search">
+                    <button class="btn btn-outline-success" type="submit">buscar</button>
+                </form>
+            </div>
+        </div>
+        <hr size="4">
+        {{#each posts}}
+        <div class="d-flex text-muted pt-1 row">
+            <div class="d-block pb-1">
+                <small>Data de criação: {{date}}</small>
+                <small>Categoria: {{category.nome}}</small>
+            </div>
+            <hr>
+            <div class="col-sm-10 d-flex mb-2">
+                <img src="https://source.unsplash.com/45x45/?letter" style="padding: 3px; border-radius: 5px;" width="45px" height="45px" alt="categoria">
+                <p class="pb-3 mb-0 small lh-sm ms-2">
+                    <strong class="d-block text-gray-dark">Título: {{title}}</strong>
+                    {{description}}
+                </p>
+            </div>
+            <div class="col row ms-1 mt-5 gap-1 mb-2">
+                <a href="" class="btn btn-outline-secondary col w-50">Editar</a>
+                <a href="" class="btn btn-outline-danger col w-50">Deletar</a>
+            </div>
+            <hr size="4">
+        </div>
+        {{/each}}
+        <a href="/admin/addpost">Adicionar postagem</a>
+    </div>
+</div>

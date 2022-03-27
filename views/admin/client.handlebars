@@ -1,0 +1,75 @@
+{{>navbarAdmin}}
+<div class="container">
+    <div class="my-3 p-3 bg-body rounded shadow-sm">
+        <div class="d-flex row p">
+            <div class="col">
+                <h6 class="pb-2 mb-0">Clientes
+                    <span class="badge bg-light text-dark rounded-pill align-text-bottom">{{categories.length}}</span>
+                </h6>
+            </div>
+            <div class="col">
+                <form class="d-flex my-auto pb-2 mb-0 search" action="/admin/search-usuarios" method="post">
+                    <input class="form-control me-2" type="search" name="search" placeholder="Usuario" aria-label="Search">
+                    <button class="btn btn-outline-success" type="submit">buscar</button>
+                </form>
+            </div>
+        </div>
+        <hr>
+        <!--Message flash da pesquisa-->
+        {{#if searchName}}
+                <h6>Resultado da busca:
+                    <span class="badge bg-light text-dark rounded-pill align-text-bottom">{{searchName.length}}</span>
+                </h6>
+        {{#each searchName}}
+            <div class="d-flex text-muted pt-3 row bg-light p-3 " style="border-radius: 10px;">
+                <div class="d-flex col-sm-10">
+                    <img src="data:image/jpg;base64,{{file}}"  width="40px" height="40px" alt="user" class="rounded-circle">
+                    <!--<img src="/img/users.png" width="40px" height="40px" alt="user">-->
+                    <p class="pb-3 mb-0 small lh-sm ms-3">
+                        <strong class="d-block text-gray-dark">Nome: {{nome}}</strong>
+                        <strong class="d-block text-gray-dark">Sobrenome: {{sobrenome}}</strong>
+                        <strong class="d-block text-gray-dark">Email: {{email}}</strong>
+                    </p>
+                    <p>Data de cadastro: {{date}}</p>
+                    {{#if adm}}
+                    <p class="ms-2">Administrador</p>
+                    {{/if}}
+                </div>
+                <div class="row gap-1 mt-5 col-sm-2">
+                    <a href="/admin/editclientes/{{_id}}" class="col btn btn-outline-secondary w-50">Editar</a>
+                    <a href="/admin/deleteclientes/{{_id}}" class="col btn btn-outline-danger w-50">Deletar</a>
+                </div>
+            </div>
+        <hr>
+        {{/each}}
+        {{/if}}
+        {{#if error}}
+            <h6 class="alert alert-secondary">{{error}}</h6>
+        {{/if}}
+        <!--....-->
+        {{#each users}}
+        <div class="d-flex text-muted pt-3 row">
+            <div class="d-flex col-sm-10">
+                <img src="data:image/jpg;base64,{{file}}"  width="40px" height="40px" alt="user" class="rounded-circle" style="object-fit: cover;">
+                <!--<img src="/img/users.png" width="40px" height="40px" alt="user"-->
+                <p class="pb-3 mb-0 small lh-sm ms-3">
+                    <strong class="d-block text-gray-dark">Nome: {{nome}}</strong>
+                    <strong class="d-block text-gray-dark">Sobrenome: {{sobrenome}}</strong>
+                    <strong class="d-block text-gray-dark">Email: {{email}}</strong>
+                    <strong class="d-block bold">Data de cadastro: {{date}}</strong>
+                </p>
+            </div>
+            <div class="row gap-1 mt-0 col-sm-2">
+                {{#if adm}}
+                <p class="d-block bold ms-5">Administrador</p>
+                {{/if}}
+                <a href="/admin/editclientes/{{_id}}" class="col btn btn-outline-secondary mt-5 w-50">Editar</a>
+                <a href="/admin/deleteclientes/{{_id}}" class="col btn btn-outline-danger mt-5 w-50">Deletar</a>
+            </div>
+        </div>
+        <hr>
+        {{else}}
+        <h4>Nenhum cliente cadastrado</h4>
+        {{/each}}
+    </div>
+</div>

@@ -1,0 +1,37 @@
+{{>navbarSecondary}}
+<div class="container mt-3">
+    {{#if success}}
+        <p class="alert alert-success">{{success}}</p>
+    {{/if}}
+    {{#if error}}
+        <p class="alert alert-danger">{{error}}</p>
+    {{/if}}
+</div>
+<div class="container">
+    <div class="row">
+        <div class="col-sm-12 mt-4">
+            <div class="m-auto text-center">
+                <span class="text-dark fs-2">Faça o</span>
+                <span class="text-dark fs-2 fw-bold">seu login.</span>
+            </div>
+            <form action="/login" method="post">
+                <div class="inputsRegister row gap-2 mt-4 w-75 mx-auto">
+                    <div>
+                        <input type="text" name="username" class="form-control res" placeholder="E-mail">
+                    </div>
+                    <div>
+                        <input type="password" name="password" class="form-control" placeholder="Senha">
+                    </div>
+                    <div>
+                        <hr>
+                        <button type="submit" class="btn btn-info text-white btnLogin w-100">Acessar</button>
+                    </div>
+                    <div>
+                        <p class="bold">Ainda não registrado? <a href="/cadastro">Faça seu cadastro</a></p>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{{>footer}}

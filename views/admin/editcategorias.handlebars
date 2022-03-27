@@ -1,0 +1,33 @@
+{{>navbarAdmin}}
+<div class="container mt-5">
+    {{#each erros}}
+        <p class="alert alert-danger">{{text}}</p>
+    {{else}}
+    {{/each}}
+    {{>msg}}
+    <form action="/admin/editcategorias" method="post">
+        <h4>Editar categoria</h4>
+        <hr>
+        <div class="row g-3">
+            
+            <div class="col-12">
+                <label for="categoria" class="form-label">Nome da categoria</label>
+                <div class="input-group">
+                    <span class="input-group-text">@</span>
+                    <input type="text" class="form-control" name="categoria" placeholder="Categoria" value="{{categoria.nome}}" required>
+                </div>
+            </div>
+            <input type="hidden" value="{{categoria.slug}}" name="id">
+            <div class="col-12">
+                <label for="slug" class="form-label">Slug</label>
+                <div class="input-group">
+                    <span class="input-group-text">/</span>
+                    <input type="text" class="form-control" name="slug" placeholder="Slug" value="{{categoria.slug}}" required>
+                </div>
+            </div>
+
+            <hr class="my-4">
+            <button class="w-100 btn btn-primary btn-lg mb-1" type="submit">Salvar alterações</button>
+        </div>
+    </form>
+</div>

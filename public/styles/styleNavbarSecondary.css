@@ -1,0 +1,8 @@
+.imgNavbar{
+    width: 60px;
+}
+.logoNavbar{
+    margin-top: 50px;
+    margin-left: 50px;
+    display: flex;
+}

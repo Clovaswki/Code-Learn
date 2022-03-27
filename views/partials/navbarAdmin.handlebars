@@ -1,0 +1,24 @@
+<header>
+    <nav class="navbar navbar-light bg-transparent h-auto">
+        <div class="container-fluid">
+            <div class="logoAdmin">
+                <a href="/"><img src="/img/logoCodeLearn.png" width="60px" class="imgAdmin" alt="logo"></a>
+                <a class="navbar-brand text-lightgrey mt-2 p-1 fw-bolder" href="#">Code Learn</a>
+            </div>
+        </div>
+    </nav>
+    <div class="nav-scroller bg-body shadow-sm">
+    <nav class="nav nav-underline" aria-label="Secondary navigation">
+        <a class="nav-link active" aria-current="page" href="/admin/home">Categorias</a>
+        <a class="nav-link" href="/admin/postagens">
+        Postagens
+        <span class="badge bg-light text-dark rounded-pill align-text-bottom">{{posts.length}}</span>
+        </a>
+        <a class="nav-link" href="#">Explore</a>
+        <a class="nav-link" href="/admin/clientes">
+        Clientes
+        <span class="badge bg-light text-dark rounded-pill align-text-bottom">{{users.length}}</span>
+        </a>
+    </nav>
+    </div>
+</header>

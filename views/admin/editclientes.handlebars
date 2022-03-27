@@ -1,0 +1,51 @@
+{{>navbarAdmin}}
+<div class="container mt-5">
+    {{#each erros}}
+        <p class="alert alert-danger">{{text}}</p>
+    {{else}}
+    {{/each}}
+    {{>msg}}
+    <form action="/admin/editclientes" method="post">
+        <h4>Alterar dados do usuário: </h4>
+        <hr>
+        <div class="row g-3">
+            
+            <div class="col-12">
+                <label for="nome" class="form-label">Nome do cliente</label>
+                <div class="input-group">
+                    <span class="input-group-text">Nome</span>
+                    <input type="text" class="form-control" name="nome" placeholder="Nome" value="{{user.nome}}" required>
+                </div>
+            </div>
+            <div class="col-12">
+                <label for="sobrenome" class="form-label">Sobrenome do cliente</label>
+                <div class="input-group">
+                    <span class="input-group-text">Sobrenome</span>
+                    <input type="text" class="form-control" name="sobrenome" placeholder="Sobrenome" value="{{user.sobrenome}}" required>
+                </div>
+            </div>
+            <div class="col-12">
+                <label for="email" class="form-label">Email do cliente</label>
+                <div class="input-group">
+                    <span class="input-group-text">@Email</span>
+                    <input type="text" class="form-control" name="email" placeholder="Email" value="{{user.email}}" required>
+                </div>
+            </div>
+            <input type="hidden" name="id" value="{{user._id}}">
+            <div class="col-12">
+                <label for="adm" class="form-label">Acesso</label>
+                <select name="adm" class="form-select">
+                    {{#if user.adm}}
+                        <option value="{{true}}">Administrador</option>
+                        <option value="{{false}}">Usuário</option>
+                    {{else}}
+                        <option value="{{false}}">Usuário</option>
+                        <option value="{{true}}">Administrador</option>
+                    {{/if}} 
+                </select>
+            </div>
+            <hr class="my-4">
+            <button class="w-100 btn btn-primary btn-lg mb-1" type="submit">Salvar alterações</button>
+        </div>
+    </form>
+</div>

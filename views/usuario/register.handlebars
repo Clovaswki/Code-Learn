@@ -1,0 +1,52 @@
+{{>navbarSecondary}}
+<div class="container">
+    {{#each erros}}
+        <p class="alert alert-danger">{{text}}</p>
+    {{else}}
+    {{/each}}
+    {{>msg}}
+</div>
+<div class="container">
+    <div class="row">
+        <div class="col-sm-12 mt-4">
+            <div class="m-auto text-center">
+                <span class="text-dark fs-2">Crie sua</span>
+                <span class="text-dark fs-2 fw-bold">conta gratuitamente como cliente.</span>
+            </div>
+            <form action="/cadastro" method="post" enctype="multipart/form-data">
+                <div class="inputsRegister row gap-2 mt-4 w-75 mx-auto">
+                    <div class="row gap-2">
+                        <div class="col">
+                            <input type="text" class="form-control res" placeholder="Nome" name="nome" aria-label="First name">
+                        </div>
+                        <div class="col">
+                            <input type="text" class="form-control res" placeholder="Sobrenome" name="sobrenome" aria-label="Last name">
+                        </div>
+                    </div>
+                    <div>
+                        <input type="text" name="email" class="form-control res" placeholder="E-mail">
+                    </div>
+                    <div>
+                        <input type="password" name="senha" class="form-control" placeholder="Senha">
+                    </div>
+                    <div>
+                        <input type="password" name="senha2" class="form-control" placeholder="Repita a senha">
+                    </div>
+                    <div>
+                        <div class="mb-3">
+                            <label for="formFile" class="form-label">Escolha uma foto de usuario</label>
+                            <input class="form-control" type="file" id="formFile" name="fileUser">
+                        </div>
+                    </div>
+                    <div>
+                        <button type="submit" class="btn btn-info text-white">Registrar</button>
+                    </div>
+                    <div>
+                        <p>Já registrado? <a href="/login">faça o seu login</a></p>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{{>footer}}

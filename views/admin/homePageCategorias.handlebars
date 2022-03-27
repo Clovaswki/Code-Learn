@@ -1,0 +1,65 @@
+{{>navbarAdmin}}
+<div class="container">
+    <div class="my-3 p-3 bg-body rounded shadow-sm">
+        <div class="d-flex row p">
+            <div class="col">
+                <h6 class="pb-2 mb-0">Categorias
+                    <span class="badge bg-light text-dark rounded-pill align-text-bottom">{{categories.length}}</span>
+                </h6>
+            </div>
+            <div class="col">
+                <form class="d-flex my-auto pb-2 mb-0 search" action="/admin/search-categorias" method="post">
+                    <input class="form-control me-2" type="search" placeholder="Nome da categoria" name="search" aria-label="Search">
+                    <button class="btn btn-outline-success" type="submit">buscar</button>
+                </form>
+            </div>
+        </div>
+        <hr>
+        <!--Message flash da pesquisa-->
+        {{#if searchName}}
+                <h6>Resultado da busca:</h6>
+            {{#each searchName}}
+                <div class="d-flex text-muted pt-3 bg-light row p-3">
+                    <div class="d-flex col-sm-10">
+                        <svg class="bd-placeholder-img flex-shrink-0 me-2 rounded" width="32" height="32" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 32x32" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#007bff"/><text x="50%" y="50%" fill="#007bff" dy=".3em">32x32</text></svg>
+                        <p class="pb-3 mb-0 small lh-sm">
+                            <strong class="d-block text-gray-dark">@{{nome}}</strong>
+                            Data de criação: {{date}}
+                        </p>
+                    </div>
+                    <input type="hidden" name="id" value="{{slug}}">
+                    <div class="row gap-1 mt-5 col-sm-2">
+                        <a href="/admin/editcategorias/{{slug}}" class="col btn btn-outline-secondary w-50">Editar</a>
+                        <a href="/admin/deletecategorias/{{slug}}" class="col btn btn-outline-danger w-50">Deletar</a>
+                    </div>
+                </div>
+                <hr>
+            {{/each}}
+        {{/if}}
+        {{#if error}}
+            <h6 class="alert alert-secondary">{{error}}</h6>
+        {{/if}}
+        <!--....-->
+        {{#each categories}}
+        <div class="d-flex text-muted pt-3 row">
+            <div class="d-flex col-sm-10">
+                <svg class="bd-placeholder-img flex-shrink-0 me-2 rounded" width="32" height="32" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 32x32" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#007bff"/><text x="50%" y="50%" fill="#007bff" dy=".3em">32x32</text></svg>
+                <p class="pb-3 mb-0 small lh-sm">
+                    <strong class="d-block text-gray-dark">@{{nome}}</strong>
+                    Data de criação: {{date}}
+                </p>
+            </div>
+            <input type="hidden" name="id" value="{{slug}}">
+            <div class="row gap-1 mt-5 col-sm-2">
+                <a href="/admin/editcategorias/{{slug}}" class="col btn btn-outline-secondary w-50">Editar</a>
+                <a href="/admin/deletecategorias/{{slug}}" class="col btn btn-outline-danger w-50">Deletar</a>
+            </div>
+        </div>
+        <hr>
+        {{else}}
+        {{/each}}
+        <small class="d-block text-end mt-3">
+        <a href="/admin/addcategorias">Adicionar categoria</a>
+        </small>
+    </div>
+</div>
