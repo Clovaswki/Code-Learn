@@ -16,7 +16,7 @@
         visibility: hidden;
         overflow-y: scroll;
         height: 0vh;
-        transition: 1s;
+        transition: .5s;
         width: 100%;
         position: absolute;
         z-index: 1;
@@ -68,12 +68,4 @@
 }
 
 /*Card dos posts*/
-.categoriesIcon{
-    background-color: #d42020;
-    padding: 3px;
-    text-decoration: none;
-    color: #fff;
-    margin-left: 5px;   
-    font-size: .7rem;
-}
 

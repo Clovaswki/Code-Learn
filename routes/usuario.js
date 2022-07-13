@@ -14,11 +14,10 @@ const {loginFlash, fileEncode} = require('../helpers/helpers')//functions helper
     //rota de cadastro
     router.get('/cadastro', (req, res) => {
         res.render('usuario/register')
-
     })
 
     //rota de inserção dos dados 
-    router.post('/cadastro', upload, (req, res) => {
+    router.post('/cadastro', upload, async(req, res) => {
         
         var erros = [] 
         let nome = req.body.nome.toLowerCase(),
@@ -50,7 +49,7 @@ const {loginFlash, fileEncode} = require('../helpers/helpers')//functions helper
         if(erros.length > 0){
             res.render('usuario/register', {erros: erros})
         }else{
-            User.findOne({email: req.body.email}).then((user) => {
+            User.findOne({email: req.body.email}).then(async(user) => {
                 if(user){
                     req.flash('error', 'Esta conta já existe!')
                     res.redirect('/cadastro')
@@ -66,7 +65,7 @@ const {loginFlash, fileEncode} = require('../helpers/helpers')//functions helper
                         file: fileContent
                     }
     
-                    new User(newUser).save().then(() => {
+                    await new User(newUser).save().then(() => {
                         req.flash('success', "Cliente cadastrado")
                         res.redirect('/cadastro')
                     }).catch((err) => {

@@ -11,7 +11,9 @@
     const flash = require('connect-flash')
     const passport = require('passport')
     require('./models/Usuario')
+    require('./models/Postagem')
     const User = mongoose.model('usuarios')
+    const Post = mongoose.model('posts')
     const fs = require('fs')
     require('dotenv/config')
 
@@ -67,27 +69,30 @@
         app.use(express.static(path.join(__dirname, 'public')))
 //Rotas
     //rota do home page
-        app.get('/', (req, res) => {
+        app.get('/', async(req, res) => {
             if(req.isAuthenticated()){
-                User.findOne({email: req.user.email}).then((user) => {
-                    res.render('homePage', {user: user})
-                }).catch((err) => {
+                try{
+                    let user = await User.findOne({email: req.user.email}).exec()
+                    let posts = await Post.find().populate('category').sort({date: 'desc'}).exec()
+                    res.render('homePage', {user: user, posts: posts})
+                }catch(err){
                     req.flash('Erro interno!')
-                    res.redirect('/404')
-                })
+                    res.status(404).redirect('/404')
+                }
             }else{
                 try{
-                    res.render('homePage')
+                    let posts = await Post.find().populate('category').sort({date: 'desc'}).exec()
+                    res.render('homePage', {posts: posts})
                 }catch(err){
                     console.log(`Erro ao renderizar o homePage: ${err}`)
-                    res.redirect('/404')
+                    res.status(404).redirect('/404')
                 }
             }
         })
 
         //erro 404: not found
         app.get('/404', (req, res) => {
-            res.send('#404')
+            res.render('404')
         })
 
         //grupo de rotas do usuario

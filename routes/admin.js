@@ -20,7 +20,7 @@ const fs = require('fs')
                 })
             })
         }).catch((err) => {
-            res.send('#404')
+            res.status(404).send('#404')
         })
     })
 
