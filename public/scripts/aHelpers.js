@@ -123,7 +123,7 @@ const formatDate = (currentDate) => {
 //request to api of system
 const requestAPI = {
     //baseURL: 'http://localhost:3000',
-    baseURL: "http://"+location.host,
+    baseURL: "https://"+location.host,
     post: async (endpoint, body) => {
 
         var headers = {
