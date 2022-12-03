@@ -1,7 +1,7 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-dark">
+<nav class="navbar navbar-expand-lg navbar-light bg-dark" style="z-index: 1000;">
   <div class="container-fluid">
     <div>
-      <a href="#"><img class="logo" src="/img/logo.png" alt="logo"></a>
+      <a href="/"><img class="logo" src="/img/logo.png" alt="logo"></a>
       <a class="navbar-brand p-2 text-white fw-bolder align-middle" href="#">Code learn</a>
     </div>
     <div>
@@ -9,40 +9,57 @@
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-        <div class="navbar-nav">
+        <div class="navbar-nav gap-2">
           {{#if userAuth}}
-          <img src="data:image/jpg;base64,{{user.file}}" alt="user" width="45px" height="45px" class="rounded-circle" style="object-fit: cover;">
-          <!--<img class="" src="/img/user.png" width="45px" alt="{{user.nome}}">-->
-          <p class="text-white my-auto nav-link fw-bold">Olá, {{user.nome}}</p>
+          <a href="/perfil" style="text-decoration: none;">
+            <div class="d-flex btnProfile">
+              <img src="data:image/jpg;base64,{{user.file}}" alt="user" width="45px" height="45px" class="rounded-circle" style="object-fit: cover;">
+              <p class="text-white my-auto nav-link fw-bold">Olá, {{user.nome}}</p>
+            </div>
+          </a>
+          <span class="nav-component">
+            <a href="/criar-post" style="text-decoration: none;">
+              <button class="btn btn-outline-light border-2">Criar post</button>
+            </a>
+          </span>
           {{else}}
           <a class="nav-link btn btn-success text-white" aria-current="page" href="/login">Faça o seu login</a>
           {{/if}}
-          <a class="nav-link text-white" href="#">Categorias</a>  
-          <a class="nav-link text-white" href="#">Info</a>
+          
+          <span class="nav-component">
+            <a class="nav-link text-white" href="/categories">Categorias</a>  
+            <div class="line"></div>
+          </span>
           {{#if user.adm}}
-          <a class="nav-link text-white" href="/admin/home">Admin</a>
+          <span class="nav-component">
+            <a class="nav-link text-white" href="/admin/home">Admin</a>
+            <div class="line"></div>
+          </span>
           {{/if}}
           {{#if userAuth}}
-          <a class="nav-link text-white btn btn-danger" href="/logout">Sair</a>
+          <a class="nav-link text-white btn btn-danger nav-component" href="/logout">Sair</a>
           {{/if}}
         </div>
       </div>
     </div>
   </div>
 </nav>
+
  <!--media queries-->
-    <div class="navMedia bg-dark">
+    <div class="navMedia bg-dark"  style="z-index: 1000;">
       <ul class="btnsNav">
         {{#if userAuth}}
-        <div class="d-flex mb-3">
-          <img src="data:image/jpg;base64,{{user.file}}" alt="user" width="45px" height="45px" class="rounded-circle">
-          <!--<img class="" src="/img/user.png" width="45px" alt="{{user.nome}}">-->
-          <p class="text-white my-auto nav-link fw-bold">Olá, {{user.nome}}</p>
-        </div>
+        <a href="/perfil" style="text-decoration: none;">
+          <div class="d-flex mb-3">
+            <img src="data:image/jpg;base64,{{user.file}}" alt="user" width="45px" height="45px" class="rounded-circle">
+            <!--<img class="" src="/img/user.png" width="45px" alt="{{user.nome}}">-->
+            <p class="text-white my-auto nav-link fw-bold">Olá, {{user.nome}}</p>
+          </div>
+        </a>
         {{else}}
         <li><a href="/login" class="fw-bold">Faça o seu login</a></li>
         {{/if}}
-        <li><a href="#" class="fw-bold">Categorias</a></li>
+        <li><a href="/categories" class="fw-bold">Categorias</a></li>
         <li><a href="#" class="fw-bold">Informações</a></li>
         {{#if user.adm}}
         <li><a href="/admin/home" class="fw-bold">Admin</a></li>

@@ -1,84 +1,78 @@
-    {{>navbar}}
-    <section class="cardFirst">
-        <div class="position-relative overflow-hidden p-3 p-md-5 m-md-3 text-center bg-light banner">
-            <div class="col-md-5 p-lg-5 mx-auto my-5 text">
-                <h1 class="display-4 fw-normal">Code Learn</h1>
-                <p class="lead fw-normal">Conheça o seu manual Dev de programação. Aqui você encontra tudo sobre o universo mágico do desenvolvimento.</p>
-                <a class="btn btn-outline-secondary" href="/cadastro">Cadastro</a>
-            </div>
-            <div class="product-device shadow-sm d-none d-md-block"></div>
-            <div class="product-device product-device-2 shadow-sm d-none d-md-block"></div>
-        </div>
-    </section>
-    <!--Arts com botões linkados-->
-    <section class="card2">
-        <div class="d-md-flex flex-md-equal w-100 my-md-3 ps-md-3">
-            <div class="col-sm">
-                <div class="bg-dark me-md-3 pt-3 px-3 pt-md-5 px-md-5 text-center text-white overflow-hidden">
-                    <div class="my-3 py-3">
-                        <h2 class="display-5">Categorias</h2>
-                        <p class="lead">Conheça nossos tipos</p>
-                        <a href="#" class="btn btn-success">Ir</a>
-                    </div>
-                    <div class="bg-light shadow-sm mx-auto categoriaBackground" style="width: 80%; height: 300px; border-radius: 21px 21px 0 0;"></div>
-                </div>
-            </div>
-            <div class="col-sm">
-                <div class="bg-light me-md-3 pt-3 px-3 pt-md-5 px-md-5 text-center overflow-hidden">
-                    <div class="my-3 p-3">
-                        <h2 class="display-5">Crie uma postagem</h2>
-                        <p class="lead">Faça parte do nosso time</p>
-                        <a href="#" class="btn btn-success">Ir</a>
-                    </div>
-                    <div class="bg-dark shadow-sm mx-auto novidadeBackground" style="width: 80%; height: 300px; border-radius: 21px 21px 0 0;"></div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!--Seção de postagens-->
-    <section class="cardPosts">
-        <h4 class="blog-post-title text-center">Últimas do desenvolvimento</h4>
-        <div class="container">
+{{>navbar}}
+<section class="roleCategories">
+    
+    {{!-- inject categories --}}
+
+</section>
+<section class="cardFirst">
+    <div class="textShowBlog">
+        <span>
+            <h2>Code Learn</h2>
+            <p>Conheça o seu manual Dev de programação. Aqui você encontra tudo sobre o universo mágico do
+                desenvolvimento.</p>
+            <a href="/cadastro" style="text-decoration: none;">
+                <button class="btnRegister" type="button">
+                    <p class="m-0">Cadastre-se</p>
+                    <img src="/img/homePage/right-arrow.png" alt="arrow">
+                </button>
+            </a>
+        </span>
+    </div>
+    <div class="logoCard">
+        <span>
+            <img src="/img/logoCodeLearn.png" alt="logo" height="90px" width="90px">
+        </span>
+    </div>
+</section>
+<!--Arts com botões linkados-->
+<section class="card2">
+    <div style="flex: 1;" class="d-flex justify-content-center align-items-center">
+        {{>cardArtTwo}} 
+    </div class="">
+    <div style="flex: 1;" class="d-flex justify-content-center align-items-center">
+        {{>cardArtOne}} 
+    </div>
+</section>
+<!--Seção de postagens-->
+<section class="cardPosts" style="background-color: #F1F1F1;">
+    <div class="container">
         <div class="row">
-            <div class="col-md-8 blog-main">
+            <div class="col-md-8 blog-main cardPostsHomePage mt-3">
                 <h3 class="pb-3 mb-4 font-italic border-bottom">Postagens Dev</h3>
                 {{#each posts}}
-                    <div class="blog-post"> <!--postagem-->
-                        <h2 class="blog-post-title">{{title}}</h2>
-                        <p class="blog-post-meta">{{date}} <a href="#" class="categories">{{category.nome}}</a></p>
-                        <p>{{description}}</p>
-                        <a href="#" style="color: lightgrey;">Leia mais..</a>
-                        <hr>
-                    </div>
-                    {{else}}
-                    <h4>Sem postagens</h4>
+                
+                {{!-- post --}}
+
+                {{>postHomePage}}
+                
+                {{!-- post --}}
+
+                {{else}}
+                <h4>Sem postagens</h4>
                 {{/each}}
+                <div id="paginationComponent">
+                    <nav aria-label="...">
+                        <ul class="pagination">
+
+                            {{!-- pagination --}}
+
+                        </ul>
+                    </nav>
+                </div>
             </div>
+            <input type="hidden" value="{{numberPages}}" name="numberPages">
             <div class="col-md-1"></div>
-            <aside class="col-md-3 blog-sidebar">
-                <div class="p-3 mb-3 bg-light rounded">
+            <aside class="col-md-3 blog-sidebar mt-3">
+                <div class="p-3 mb-3 bg-light rounded" style="box-shadow: 1px 1px 10px rgba(0, 0, 0, .1);">
                     <h4 class="font-italic">Sobre</h4>
-                    <p class="mb-0">A linguagem de programação é um método padronizado, formado por um conjunto de regras sintáticas e semânticas, de implementação de um código fonte - que pode ser compilado e transformado em um programa de computador,[1] ou usado como script interpretado - que informará instruções de processamento ao computador</p>
+                    <p class="mb-0">A linguagem de programação é um método padronizado, formado por um conjunto de
+                        regras sintáticas e semânticas, de implementação de um código fonte - que pode ser compilado e
+                        transformado em um programa de computador,[1] ou usado como script interpretado - que informará
+                        instruções de processamento ao computador</p>
                 </div>
+
                 <div class="p-3">
-                    <h4 class="font-italic">Arquivos</h4>
-                    <ol class="list-unstyled mb-0">
-                        <li><a href="#">Março 2014</a></li>
-                        <li><a href="#">Fevereiro 2014</a></li>
-                        <li><a href="#">Janeiro 2014</a></li>
-                        <li><a href="#">Dezembro 2013</a></li>
-                        <li><a href="#">Novembro 2013</a></li>
-                        <li><a href="#">Outubro 2013</a></li>
-                        <li><a href="#">Setembro 2013</a></li>
-                        <li><a href="#">Agosto 2013</a></li>
-                        <li><a href="#">Julho 2013</a></li>
-                        <li><a href="#">Junho 2013</a></li>
-                        <li><a href="#">Maio 2013</a></li>
-                        <li><a href="#">Abril 2013</a></li>
-                    </ol>
-                </div>
-                <div class="p-3">
-                    <h4 class="font-italic">Elsewhere</h4>
+                    <h4 class="font-italic">Redes Sociais</h4>
                     <ol class="list-unstyled">
                         <li><a href="#">GitHub</a></li>
                         <li><a href="#">Twitter</a></li>
@@ -86,8 +80,8 @@
                     </ol>
                 </div>
             </aside>
-        </div>   
         </div>
-    </section>    
-    <!--footer-->
-    {{>footer}}
+    </div>
+</section>
+<!--footer-->
+{{>footer}}

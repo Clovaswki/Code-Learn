@@ -1,0 +1,102 @@
+{{>navbar}}
+<div class="cardProfile">
+    <span class="backgroundBlue">
+
+    </span>
+    <div class="card_info_of_user">
+        <div class="contentImg">
+            <span>
+                <img src='data:image/jpg;base64,{{user.file}}' alt="user">
+            </span>
+        </div>
+        <div class="contentUser">
+            <div class="nameInfo">
+                <p id="nameUser">{{user.nome}}</p>
+                <p id="descriptionUser">{{user.descricao}}</p>
+                <span id="date-user">
+                    <img src="/img/calendar.png" alt="calendar">
+                    <small>Entrou em </small>
+                </span>
+            </div>
+            <div class="lineDivider-cardUser"></div>
+            <div class="decoration-logos">
+                <div>
+                    <img src="/img/python.png" >
+                    <img src="/img/link.png" >
+                    <img src="/img/javascript.png" >
+                    <img src="/img/code.png" >
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="cards-profileUser">
+        <div id="descriptionUser">
+            <p class="blockquote h5 m-0 mt-2 ms-3 mb-2 opacity-75">Sobre mim</p>
+            <span class="lineDivider-cards"></span>
+            <span class="p-3">
+                <span class="">
+                    <p class="h6 m-0">Idade</p>
+                    <small class="lead">{{user.idade}}</small>
+                </span>
+                <span>
+                    <p class="h6 m-0">E-mail</p>
+                    <small class="lead">{{user.email}}</small>
+                </span>
+                <span>
+                    <p class="h6 m-0">Sobrenome</p>
+                    <small class="lead">{{user.sobrenome}}</small>
+                </span>
+            </span>
+        </div>
+        <div id="postsUser" class="d-flex flex-column">
+            <span class="d-inline-flex p-3 align-items-center w-100 justify-content-center gap-3">
+                <img src="/img/posts.png" alt="post" style="width: 35px; height: 35px; opacity: .75;">
+                <p class="m-0 h6 opacity-75">0 Posts publicados</p>
+            </span>
+            <div id="injectBtnSowPosts" class="d-flex justify-content-center align-items-center h-100">
+
+                {{!-- injection button show posts created by user --}}
+
+            </div>
+        </div>
+        <div id="randomCategories" class="d-flex flex-column">
+            <span class="d-flex gap-3 align-items-center p-3">
+                <img src="/img/hastagBox.png" alt="hastag" style="width: 25px; height: 25px;">
+                <p class="m-0 h5 opacity-75">Categorias</p>
+            </span>
+            <span class="lineDivider-cards"></span>
+            <div class="categoriesAleatory" style="flex: 1;" data_categories>
+
+                {{!-- iteration of random three categories --}}
+
+                {{>load}}
+            
+            </div>
+        </div>
+    </div>
+    <input id="createdUser" type="hidden" value="{{user.date}}">
+</div>
+
+{{!-- modal profile --}}
+<div class="modal-profile">
+    <span class="p-3 d-flex justify-content-between">
+        <p class="m-0 h5">Minhas postagens</p>
+        <button type="button" class="btn-close" id="btnClose-modalProfile" data-bs-dismiss="modal" aria-label="Close"></button>
+    </span>
+    <div class="__line__"></div>
+    <div class="d-flex flex-column" style="overflow-y: auto;">
+        <div class="d-flex gap-3 align-items-center p-3">
+            <img src="data:image/jpg;base64,{{user.file}}" class="rounded-circle" style="object-fit: cover;" width="50px" height="50px">
+            <small class="lead">{{user.nome}}</small>
+        </div>
+        <div class="__line__"></div>
+        <div id="injectPostsCreated">
+            
+            {{!-- injection of user posts --}}
+
+        </div>
+    </div>
+</div>
+{{!-- modal profile --}}
+
+<input type="hidden" value="{{user._id}}" name="userId-profile">

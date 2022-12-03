@@ -1,0 +1,58 @@
+.cardPostsHomePage{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.postHomePage{
+    background-color: #ffff;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+}
+.userInfo-postHomePage{
+    padding: 20px 30px 5px 30px;
+    display: flex;
+    gap: .6rem;
+}
+
+.userInfo-postHomePage img{
+    width: 40px;
+    height: 40px;
+    border-radius: 14px;
+    object-fit: cover;
+}
+.userInfo-postHomePage div{
+    line-height: 1px;
+    display: flex;
+    flex-direction: column;
+}
+
+.postInfo-postHomePage{
+    padding: 5px 70px;
+}
+.postInfo-postHomePage h3{
+    cursor: pointer;
+}
+.postInfo-postHomePage h3:hover{
+    color: #644483;
+}
+
+.postHomePage div{
+    display: flex;
+    gap: 10px;
+}
+
+.buttons-postHomePage{
+    padding: 20px 70px 20px 70px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.btnLike-postHomePage{
+    padding: 3px 7px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+.btnLike-postHomePage:hover{
+    background-color:  rgb(93, 91, 212, .07);
+}

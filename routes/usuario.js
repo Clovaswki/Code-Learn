@@ -26,7 +26,9 @@ const {loginFlash, fileEncode} = require('../helpers/helpers')//functions helper
             senha = req.body.senha.toLowerCase(),
             senha2 = req.body.senha2.toLowerCase(),
             filename = req.file.filename,
-            fileContent = fileEncode(req.file.path)
+            fileContent = fileEncode(req.file.path),
+            descricao = req.body.descricao,
+            idade = req.body.idade
 
         if(!nome || typeof nome == undefined || nome == null){
             erros.push({text: "Nome inválido!"})
@@ -62,7 +64,9 @@ const {loginFlash, fileEncode} = require('../helpers/helpers')//functions helper
                         email: email,
                         senha: bcrypt.hashSync(senha, salt),
                         filename: filename,
-                        file: fileContent
+                        file: fileContent,
+                        idade,
+                        descricao
                     }
     
                     await new User(newUser).save().then(() => {
@@ -99,6 +103,16 @@ const {loginFlash, fileEncode} = require('../helpers/helpers')//functions helper
                 return res.redirect('/')
             })
         })(req, res, next)
+    })
+
+    //rota de perfil
+    router.get('/perfil', (req, res) => {
+        if(req.isAuthenticated()){
+            return res.render('profile', {user: req.user})
+        }
+        req.flash('error', 'Faça login primeiro')
+        res.redirect('/')
+        
     })
 
     //rota de logout

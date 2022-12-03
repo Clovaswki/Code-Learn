@@ -1,0 +1,94 @@
+{{>navbar}}
+<div class="cardPost">
+    <div class="buttonsPost">
+        <div class="btnsFirst">
+            <span class="d-flex flex-column align-items-center" id="btn-like">
+                <img src="/img/btnLike.svg" alt="like">
+                <small>{{post.numberLike.length}}</small>
+            </span>
+            <span class="d-flex flex-column align-items-center justify-content-center" id="btn-save">
+                <img src="/img/btnSave.svg" alt="save">
+            </span>
+        </div>
+    </div>
+    <div class="buttonsPostMobile">
+        <span id="btn-like" style="position: relative;">
+            <img src="/img/btnLike.svg"/>
+            <small style="">
+                {{post.numberLike.length}}
+            </small>
+        </span>
+        <span id="btn-save">
+            <img src="/img/btnSave.svg"/>
+        </span>
+        <span>
+            <img src="/img/back.png"/>
+        </span>
+    </div>
+    <div class="contentCenterPost">
+        <div class="spaceCenter">
+            <div class="header-postagem">
+                <span id="titleFirstPost" title="titleFirst">
+                    {{post.title}}
+                </span>
+                <span title="infoUser" id="infoUserPost">
+                    <img src="data:image/jpg;base64,{{post.user.file}}" alt="user">
+                    <div>
+                        <p>{{post.user.nome}}</p>
+                        <small></small>
+                    </div>
+                </span>
+                <span title="categories" id="categoriesOfPost">
+                    {{!-- inject of categories --}}
+                    {{#each post.category}}
+                    <small>#{{nome}}</small>
+                    {{/each}}
+                </span>
+            </div>
+            <div class="body-postagem" style="width: 80%;">
+                
+            </div>
+        </div>
+    </div>
+    <div class="infoAboutPost">
+        <div class="dataOfUser">
+            <span class="decoration-background">
+            
+            </span>
+            <div class="header-dataOfUser">
+                <img src="data:image/jpg;base64,{{post.user.file}}" alt="user">
+                <p>{{post.user.nome}}</p>
+            </div>
+            <div class="mt-5 p-3 d-flex flex-column gap-3">
+                <span>
+                    <p class="m-0 h5" style="line-height: 14px;">Sobre</p>
+                    <small class="lead" style="font-size: 16px; line-height: 10px;">{{post.user.descricao}}</small>
+                </span>
+                <span>
+                    <p class="m-0 h5" style="line-height: 14px;">Idade</p>
+                    <small class="lead" style="font-size: 16px; line-height: 10px;">{{post.user.idade}}</small>
+                </span>
+            </div>
+        </div>
+        <div class="moreCategories">
+            <div class="header-moreCategories">
+                <img src="/img/hastagBlack.png" alt="hastag" width="30px" height="30px">
+                <p class="m-0 h6 opacity-75">Mais categorias</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<input type="hidden" value="{{post.content}}" name="contentPost">
+<input type="hidden" value="{{post.createdAt}}" name="createdAt-post">
+<input type="hidden" value="{{post.updatedAt}}" name="updatedAt-post">
+<input type="hidden" value="{{post._id}}" name="postId-post">
+<input type="hidden" value="{{user._id}}" name="userId-post">
+
+<div id="number-like">
+    {{#each post.numberLike}}
+    <input type="hidden" value="{{this}}">
+    {{/each}}
+</div>
+
+{{>footer}}

@@ -1,0 +1,265 @@
+.cardProfile {
+    width: 100%;
+    height: calc(100% - 70px);
+    background-color: #F5F5F5;
+    /* background-color: navy; */
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+
+.cardProfile .backgroundBlue {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 190px;
+    background-color: #1C242F;
+}
+
+.cardProfile .card_info_of_user {
+    width: 70%;
+    height: 500px;
+    z-index: 10;
+    position: relative;
+    display: flex;
+    align-items: flex-end;
+    animation: showCardProfile 500ms ease;
+}
+
+@keyframes showCardProfile {
+    from {
+        transform: translateY(50%);
+        opacity: 0;
+    }
+}
+
+.card_info_of_user .contentImg {
+    position: absolute;
+    top: 7%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.contentImg span {
+    width: 140px;
+    height: 140px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #1C242F;
+}
+
+.contentImg img {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.card_info_of_user .contentUser {
+    background-color: #fff;
+    border-radius: 10px;
+    border: 1px solid rgba(0, 0, 0, 0.3);
+    height: 80%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.contentUser .lineDivider-cardUser {
+    width: 100%;
+    height: 1px;
+    background-color: rgb(128, 128, 128, .3);
+}
+
+.contentUser .nameInfo {
+    margin-top: 100px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.nameInfo #nameUser {
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 800;
+    font-size: 36px;
+    line-height: 42px;
+    color: #000000;
+}
+
+.nameInfo #date-user {
+    display: flex;
+    gap: 7px;
+}
+
+.nameInfo #descriptionUser {
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: light;
+    font-size: 18px;
+    line-height: 30px;
+    opacity: .7;
+}
+
+#date-user {
+    display: flex;
+    align-items: center;
+}
+
+#date-user img {
+    width: 20px;
+    height: 20px;
+}
+
+#date-user small {
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 100;
+    font-size: 14px;
+    line-height: 16px;
+}
+
+.contentUser .decoration-logos {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.decoration-logos div {
+    display: flex;
+    gap: 70px;
+}
+
+.decoration-logos img {
+    width: 30px;
+    height: 30px;
+    opacity: .7;
+}
+
+.decoration-logos img:hover {
+    transform: scale(1.2, 1.2);
+}
+
+.cards-profileUser {
+    display: flex;
+    width: 70%;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    animation: 500ms showCardsProfile ease;
+}
+
+@keyframes showCardsProfile {
+    from {
+        transform: translateY(50%);
+        opacity: 0;
+    }
+}
+
+.cards-profileUser #descriptionUser,
+#postsUser,
+#randomCategories {
+    width: 300px;
+    height: 250px;
+    background-color: #fff;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    border-radius: 14px;
+}
+
+@media (max-width: 950px){
+    .cards-profileUser #descriptionUser,
+    #postsUser,
+    #randomCategories{
+        width: 100%;
+    }
+}
+.cards-profileUser #descriptionUser {
+    display: flex;
+    flex-direction: column;
+}
+
+#descriptionUser .header-descriptionUser {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+}
+
+.lineDivider-cards {
+    height: 1px;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.2);
+}
+
+#randomCategories .categoriesAleatory {
+    display: flex;
+    flex-direction: column;
+    padding: 15px;
+    gap: 10px;
+}
+
+.componentCategory-cardProfile {
+    background: #2A8CC2;
+    box-shadow: 2px 4px 5px rgba(0, 0, 0, 0.3);
+    border-radius: 14px;
+    display: flex;
+    gap: 15px;
+    align-items: center;
+    padding: 5px;
+    cursor: pointer;
+}
+.componentCategory-cardProfile:hover{
+    transform: scale(1.1, 1.1);
+}
+
+.componentCategory-cardProfile p {
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 20px;
+    color: #FFFFFF;
+}
+
+@media (max-width: 790px) {
+    .cardProfile .card_info_of_user {
+        width: 100%;
+    }
+
+    .cards-profileUser {
+        width: 100%;
+        flex-direction: column;
+    }
+}
+
+/*modal profile*/
+.modal-profile{
+    position: fixed;
+    z-index: 1000;
+    width: 100%;
+    height: 100vh;
+    background-color: #ffff;    
+    left: 0;
+    bottom: 0;
+    display: none;
+    flex-direction: column;
+}
+
+.showModalProfile{
+    display: flex;
+    animation: showModalProfile 500ms ease;
+}
+
+@keyframes showModalProfile{
+    from{
+        transform: translateY(100%);
+        opacity: 0;
+    }
+}
+
+/*modal profile*/

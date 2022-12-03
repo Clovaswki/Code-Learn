@@ -1,0 +1,24 @@
+{{>navbar}}
+
+<div class="cardPostsByCategory">
+    <div class="row" style="flex: .9;">
+        <div class="col-sm d-flex flex-column gap-4">
+            <div class="headerCategory">
+                <div class="tagChoosed">
+                    <span style="padding-left: 10px;">
+                        <img src="/img/hastag.png" alt="hastag">
+                    </span>
+                    <span style="padding-right: 40px;">
+                        <p>{{category.nome}}</p>
+                        <small>{{posts.length}} postagens</small>
+                    </span>
+                </div>
+            </div>
+            <div class="cardPosts-category">
+                {{#each posts}}
+                {{>postOfCategory}}
+                {{/each}}
+            </div>
+        </div>
+    </div>
+</div>

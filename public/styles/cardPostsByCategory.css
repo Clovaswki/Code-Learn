@@ -1,0 +1,82 @@
+.cardPostsByCategory {
+    height: calc(100% - 70px);
+    width: 100%;
+    background-color: #F5F5F5;
+    display: flex;
+    justify-content: center;
+}
+
+.headerCategory {
+    display: flex;
+}
+
+.headerCategory .tagChoosed {
+    margin-top: 2rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    background-color: #7491DE;
+    box-shadow: 1px 2px 10px 1px rgba(0, 0, 0, 0.2);
+    border-radius: 14px;
+    padding: 20px;
+    animation: showTag 500ms ease-out;
+}
+@keyframes showTag{
+    from{
+        transform: translateY(-100%);
+        opacity: 0;
+    }
+}
+
+.tagChoosed img {
+    width: 45px;
+    height: 45px;
+}
+
+.tagChoosed p {
+    margin: 0;
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 17px;
+    color: #FFFFFF;
+}
+
+.tagChoosed small {
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 11px;
+    line-height: 19px;
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.cardPosts-category {
+    flex: 1;
+    background-color: #ffff;
+    border: 1px solid rgba(0, 0, 0, 0.15);
+    border-radius: 14px;
+    display: flex;
+    flex-direction: column;
+    animation: showCardPosts 500ms ease-out;
+}
+@keyframes showCardPosts {
+    from{
+        transform: translateY(100%);
+        opacity: 0;
+    }
+}
+
+@media (max-width: 660px){
+    .cardPostsByCategory{
+        display: block;
+    }
+    .cardPosts-category{
+        border-radius: 0px;
+        width: 100%;
+    }
+    .headerCategory .tagChoosed{
+        width: 100%;
+    }
+}

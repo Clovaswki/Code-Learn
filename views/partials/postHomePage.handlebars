@@ -1,0 +1,30 @@
+<div class="postHomePage">
+    <div class="userInfo-postHomePage">
+        <img src="data:image/jpg;base64,{{user.file}}" alt="user">
+        <div>
+            <p class="m-0 h6">{{user.nome}}</p>
+            <small class="lead" style="font-size: 14px;">{{user.descricao}}</small>
+        </div>
+    </div>
+    <div class="postInfo-postHomePage">
+        <span>
+            <a href="/post/{{_id}}" style="text-decoration: none; color: black;">
+                <h3>{{title}}</h3>
+            </a>
+            <div>
+                {{#each category}}
+                <small class="lead d-flex" style="font-size: 14px;">{{nome}}</small>
+                {{/each}}
+            </div>
+        </span>
+    </div>
+    <div class="buttons-postHomePage">
+        <span class="d-flex gap-2 align-items-center btnLike-postHomePage">
+            <img src="/img/btnLike.svg" alt="like" width="15px" height="15px" style="filter: opacity(50%);">
+            <p class="m-0">{{numberLike.length}} curtidas</p>
+            <input type="hidden" value="{{_id}}">
+        </span>
+        <p class="m-0 lead cardDate-postHomePage" style="font-size: 14px;"></p>
+    </div>
+    <input type="hidden" value="{{createdAt}}">
+</div>

@@ -1,0 +1,22 @@
+<a href="/post/{{_id}}" style="text-decoration: none;">
+    <div class="postOfCategory">
+        <div class="contentPost">
+            <div id="postIcon">
+                <img src="/img/post.png" alt="postIcon">
+            </div>
+            <div class="infoOfPost">
+                <span class="title">
+                    <p>{{title}}</p>
+                    <small>Postado em 23/07/2020</small>
+                </span>
+                <span class="infoUser">
+                    <img src="data:image/jpg;base64,{{user.file}}" alt="user">
+                    <small>{{user.nome}}</small>
+                </span>
+            </div>
+        </div>
+        <div class="lineDivider"></div>
+        <img id="btnSavePost" src="/img/btnSave.svg" alt="markPost">
+        <input type="hidden" value="{{createdAt}}">
+    </div>
+</a>

@@ -1,0 +1,256 @@
+.cardPost {
+    height: 100%;
+    width: 100%;
+    background-color: #F5F5F5;
+    display: flex;
+}
+
+.cardPost .buttonsPost {
+    margin-top: 60px;
+    flex: .2;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+}
+
+.buttonsPostMobile{
+    display: none;
+}
+
+.buttonsPost .btnsFirst {
+    margin-top: 30px;
+    margin-left: 70px;
+    display: flex;
+    flex-direction: column;
+    gap: 50px;
+}
+
+.buttonsPost .btnsFirst span{
+    cursor: pointer;
+    padding: 10px;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+}
+.buttonsPost .btnsFirst span:hover{
+    border: 2.5px solid rgb(0, 0, 0, .3);
+}
+
+.buttonsPost img[alt=like],
+.buttonsPost img[alt=save] {
+    width: 25px;
+    height: 25px;
+    opacity: .7;
+}
+
+.cardPost .contentCenterPost {
+    margin-top: 60px;
+    height: auto;
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 70px;
+}
+
+.contentCenterPost .spaceCenter {
+    flex: 1;
+    height: auto;
+    background-color: #fff;
+    border-radius: 14px;
+    padding: 10px;
+    display: flex;
+    /* justify-content: center; */
+    align-items: center;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.spaceCenter .header-postagem {
+    margin-top: 30px;
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+}
+
+.header-postagem span[title=titleFirst] {
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 36px;
+    line-height: 42px;
+    color: #000000;
+}
+
+.header-postagem span[title=infoUser] {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.header-postagem span[title=infoUser] img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+span[title=infoUser] div {
+    display: flex;
+    gap: 5px;
+    flex-direction: column;
+}
+
+span[title=infoUser] div p {
+    margin: 0;
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 23px;
+    color: #353232;
+}
+
+span[title=infoUser] div small {
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 12px;
+    line-height: 14px;
+    color: rgba(102, 85, 85, 0.8);
+}
+
+span[title=categories] {
+    display: flex;
+    gap: 10px;
+}
+
+span[title=categories] small {
+    color: rgba(0, 0, 0, 0.8);
+    font-weight: 500;
+}
+
+.body-postagem{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding-bottom: 50px;
+}
+
+.cardPost .infoAboutPost {
+    margin-top: 60px;
+    display: flex;
+    flex: .4;
+    flex-direction: column;
+    gap: 20px;
+    align-items: center;
+}
+
+.infoAboutPost .dataOfUser {
+    height: 300px;
+    width: 80%;
+    border-radius: 14px;
+    background-color: #ffff;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+}
+
+.infoAboutPost .dataOfUser .decoration-background {
+    height: 30px;
+    width: 100%;
+    border-top-left-radius: 14px;
+    border-top-right-radius: 14px;
+    background-color: #D9D9D9;
+    z-index: 0;
+}
+
+.infoAboutPost .dataOfUser .header-dataOfUser {
+    position: absolute;
+    top: 15px;
+    left: 20px;
+    display: flex;
+    align-items: flex-end;
+    gap: 10px;
+}
+
+.infoAboutPost .dataOfUser .header-dataOfUser img {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    object-fit: cover;
+    z-index: 10;
+}
+
+.header-dataOfUser p {
+    margin: 0;
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 23px;
+    color: #353232;
+
+}
+
+.infoAboutPost .moreCategories {
+    height: 220px;
+    width: 80%;
+    border-radius: 14px;
+    background-color: #ffff;
+}
+.header-moreCategories{
+    background-color: #D9D9D9;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    padding: 7px;
+}
+
+@media (max-width: 1020px){
+    .cardPost{
+        flex-direction: column;
+    }
+    .cardPost .buttonsPost{
+        display: none;
+    }
+    .buttonsPostMobile{
+        position: fixed;
+        bottom: 0;
+        background-color: #D9D9D9;
+        padding: 20px;
+        width: 100%;
+        display: flex;
+        justify-content: space-around;
+        z-index: 30;
+    }
+    .buttonsPostMobile img{
+        width: 30px;
+        height: 30px;
+    }
+}
+
+
+
+/* format post */
+.quote{
+    background-color: rgb(217, 217, 217, .3);
+    padding: 10px;
+    border-left: 3px solid lightgray;
+    margin: 0;
+    margin: -15px 0;
+}
+.codeBlock{
+    background-color: #08090A;
+    padding: 10px;
+    border-radius: 10px;
+    color: #ffff;
+    font-weight: 500;
+    margin: 0;
+}
+.codeBlock p{
+    line-height: 30px;
+    margin: 0;
+}

@@ -1,0 +1,252 @@
+@import url('https://fonts.googleapis.com/css2?family=Assistant:wght@500&family=Ubuntu&display=swap');
+
+/*Navbar*/
+.navbar{
+    height: 70px;
+}
+.logo{
+    width: 50px;
+    border-radius: 5px;
+}
+.navMedia{
+    visibility: hidden;
+    display: none;
+}
+@media (max-width: 900px){
+    .navMedia{ 
+        visibility: hidden;
+        overflow-y: scroll;
+        height: 0vh;
+        transition: .5s;
+        width: 100%;
+        position: absolute;
+        z-index: 1;
+        display: block;
+    }
+    .show{
+        visibility: visible;
+        overflow-y: auto;
+        height: calc(100vh - 70px);
+    }
+    .btnsNav{
+        margin-top: 20px;
+    }
+    .btnsNav li{
+        padding: 5px;
+    }
+    .btnsNav a{
+        text-decoration: none;
+        color: lightgrey;
+        border: 0;
+        border-bottom: 3px solid lightgray;
+        display: block;
+        margin-left: -28px;
+    }
+    .btnsNav a:focus{
+        border: 3px solid green;
+        border-radius: 5px;
+        
+    }
+}
+
+.nav-component{
+    display: flex;
+    flex-direction: column;
+}
+.nav-component .line{
+    width: 0%;
+    height: 2px;
+    background-color: gray;
+    transition: 1s;
+}
+
+.btnProfile{
+    border-radius: 14px;
+    padding: 2px;
+    margin-top: -5px;
+    cursor: pointer;
+}
+.btnProfile:hover{
+    background-color: rgba(214, 206, 206, 0.2);
+}
+
+/*Navbar*/
+
+/*Card principal do home page*/
+.row{
+    --bs-gutter-x: 0;
+}
+
+/* card fist */
+.roleCategories{
+    background-color: #ffff;
+    height: 45px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    gap: 10px;
+}
+.roleCategories p{
+    margin: 0;
+    font-weight: 700;
+    font-size: 18px;
+    font-family: 'Ubuntu',Arial, Helvetica, sans-serif;
+}
+.roleCategories p:hover{
+    color: #583d9c;
+    cursor: pointer;
+}
+
+.cardFirst{
+    width: 100%;
+    height: 400px;
+    background-color: #75679B;
+    display: flex;
+    justify-content: space-between;
+}
+.cardFirst .textShowBlog{
+    height: 100%;
+    width: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #ffff;
+}
+.textShowBlog span{
+    height: 70%;
+    width: 50%;
+}
+.textShowBlog span p{
+    font-size: 20px;
+    line-height: 22px;
+}
+.textShowBlog span h2{
+    margin-bottom: 1.5rem;
+}
+.cardFirst .logoCard{
+    height: 100%;
+    width: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.cardFirst .logoCard span{
+    background: url(/img/binaryTwo.png);
+    height: 70%;
+    width: 50%;
+    border-radius: 24px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.logoCard span img{
+    transition: 1s;
+}
+.logoCard span img:hover{
+    transform: scale(1.5, 1.5) rotate(360deg);
+}
+
+.btnRegister{
+    border: 0;
+    padding: 10px 40px 10px 20px;
+    background-color: #5F95E8;
+    display: flex;
+    gap: 1rem;
+    border-radius: 6px;
+    color: #ffff;
+    transition: 1s;
+}
+.btnRegister img{
+    width: 27px;
+    height: 27px;
+}
+.btnRegister:hover{
+    gap: 3rem;
+}
+
+@media (max-width: 800px){
+    .roleCategories{
+        display: none;
+    }
+    .cardFirst{
+        display: flex;
+        justify-content: flex-start;
+        padding: none;
+    }
+    .cardFirst .textShowBlog{   
+        width: 100%;
+    }
+    .textShowBlog span{
+        padding: 1rem;
+        height: 100%;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 2rem;
+    }
+    .textShowBlog span p{
+        width: 80%;
+        text-align: center;
+    }
+    .textShowBlog span h2{
+        font-size: 2em;
+    }
+    .cardFirst .logoCard{
+        display: none;
+    }
+}
+/* card fist */
+
+
+/*Card secundário*/
+.card2{
+    background-image: url(/img/test.jpg);
+    background-size: cover;
+    backdrop-filter: brightness(100%);
+    padding: 30px;
+    display: flex;
+}
+
+@media (max-width: 1030px){
+    .card2{
+        flex-direction: column;
+    }
+}
+
+.novidadeBackground{
+    background-image: url('/img/developer_4x.gif');
+}
+
+.categoriaBackground{
+    background-image: url('/img/languages.jpg');
+}
+
+.artCard{
+    border-radius: 10px;
+}
+
+.categoriesOfEachPost{
+    padding: 6px 0;
+    display: flex;
+    gap: 15px;
+}
+.categoriesOfEachPost a{
+    text-decoration: none;
+}
+.categoriesOfEachPost a p{
+    background-color: rgb(211, 211, 211, .4);
+    color: gray;
+    margin: 0;
+    padding: 3px;
+    font-size: 12px;
+    border-radius: 5px;
+    box-shadow: 1px 1px 7px rgba(214, 206, 206, 0.1);
+}
+.categoriesOfEachPost a p:hover{
+    transform: scale(1.05, 1.05) translate(-5%, -5%);
+}
+
+/*Card dos posts*/

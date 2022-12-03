@@ -1,0 +1,67 @@
+.modalCreatePost-publish{
+    position: fixed;
+    background-color: #fff;
+    width: 400px;
+    height: 400px;
+    border-radius: 10px;
+    box-shadow: 1px 1px 10px rgba(0, 0, 0, .2);
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: none;
+    flex-direction: column;
+}
+
+.contentModal-createPost{
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    padding: 5px;
+    overflow-y: auto;
+    height: auto;
+    flex: 1;
+}
+
+.showModal{
+    animation: showModalCreatePost 500ms ease;
+    display: flex;
+}
+
+.success-publish{
+    display: flex;
+    height: 100%;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+.success-publish p{
+    margin: 0;
+    font-weight: 500;
+    color: rgb(11, 83, 11);
+}
+
+#preload-modal{
+    display: flex;
+    height: 100%;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 10px;
+}
+
+@keyframes showModalCreatePost{
+    from{
+        transform: translateY(100%);
+        opacity: 0;
+    }
+}
+
+@media (max-width: 700px){
+    .modalCreatePost-publish{
+        width: 100%;
+        border-radius: none;
+        height: 100%;
+    }
+}

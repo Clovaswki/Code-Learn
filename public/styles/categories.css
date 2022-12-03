@@ -7,3 +7,9 @@
     font-size: .7rem;
 }
 
+#noResults{
+    display: none;
+    justify-content: center;
+    align-items: center;
+}
+

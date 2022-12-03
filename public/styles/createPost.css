@@ -1,0 +1,272 @@
+.cardFirst-createPost{
+    animation: showCreatePost 500ms ease-in;
+}
+
+.navbar-createPost {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 30px;
+    background-color: #F5F5F5;
+    height: 70px;
+    position: relative;
+}
+
+.navs-createPost a{
+    text-decoration: none;
+    color: black;
+    padding: 10px;
+    border-radius: 10px;
+}
+.navs-createPost a:hover{
+    background-color: rgb(115, 67, 226, .1);
+    color: rgb(115, 67, 226, 1);
+}
+
+.navbar-createPost span {
+    padding: 7px;
+    border: 2px solid lightgray;
+    border-radius: 5px;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+.navbar-createPost span:hover {
+    background-color: rgb(226, 226, 226, .5);
+    box-shadow: 1px 1px 5px rgba(105, 103, 216, 0.1);
+}
+
+.body-createPost {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    background-color: #F5F5F5;
+    height: calc(100vh - 70px);
+}
+
+.card-create {
+    background-color: #ffff;
+    height: 500px;
+    width: 750px;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+}
+
+.card-create .header-createPost {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    flex: 1;
+    padding-left: 1.5rem;
+}
+.header-createPost select{
+    width: 80%;
+    margin-top: 40px;
+    border: 0;
+    padding: 12px;
+    font-weight: 400;
+    opacity: .6;
+    font-size: 18px;
+    outline: 0;
+}
+
+.header-createPost input {
+    border: 0;
+    outline: 0;
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 800;
+    font-size: 34px;
+    line-height: 40px;
+    color: rgba(23, 23, 23, 0.8);
+    width: 90%;
+    margin-top: 4rem;
+    overflow-y: auto;
+}
+
+.card-create .tools-formatingPost {
+    background-color: #EFEFEF;
+    display: flex;
+    justify-content: space-evenly;
+    padding: 7px;
+}
+
+.tools-formatingPost span {
+    cursor: pointer;
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 39px;
+    height: 39px;
+}
+
+.tools-formatingPost span:hover {
+    background-color: rgb(70, 45, 180, .1);
+    filter: saturate(100%);
+}
+
+.tools-formatingPost span img:hover {
+    filter: opacity(50%);
+}
+
+.tools-formatingPost img {
+    width: 20px;
+    height: 20px;
+}
+
+.card-create .content-createPost {
+    flex: 1;
+}
+
+.content-createPost textarea {
+    width: 100%;
+    padding: 10px;
+    height: auto;
+    border: 0;
+    resize: none;
+    outline: none;
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 20px;
+    color: rgba(0, 0, 0, 0.7);
+}
+
+/* more info */
+.moreInfo-createPost{
+    height: 500px;
+    width: 350px;
+    background-color: #ffff;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+    padding: 20px;
+}
+.moreInfo-createPost .header-moreInfo{
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+.moreInfo-createPost .inputs-createPost{
+    padding: 20px 5px;
+}
+.inputs-createPost input, .inputs-createPost textarea{
+    width: 100%;
+    resize: none;
+    outline: 0;
+    border: 0;
+    border-left: 2px solid lightgray;
+    padding-left: 10px;
+    color: gray;
+    margin-top: 1rem;
+}
+.moreInfo-createPost .categoriesChoosed{
+    display: flex;
+    flex-direction: column; 
+}
+.categoriesChoosed #all-categoriesChoosed{
+    flex: 1;
+    display: grid;
+    grid-template-columns: repeat(3, auto);
+    gap: 5px;
+    padding: 1rem 0;
+}
+#all-categoriesChoosed span{
+    font-size: 16px;
+    font-weight: 500;
+    opacity: .7;
+    line-height: 20px;
+    width: auto;
+}
+.categoriesChoosed .alertMaxCategories{
+    padding: 8px;
+    background-color: rgb(243, 243, 147, .2);
+    border-left: 2px solid rgb(226, 226, 137);
+    font-size: 16px;
+    font-weight: lighter;
+}
+/* more info */
+
+
+@media (max-width: 1000px){
+    .cards-configPost{
+        display: flex;
+        flex-direction: column;
+    }
+    .cards-configPost .card-create{
+        width: 100%;
+    }
+    .cards-configPost .moreInfo-createPost{
+        width: 100%;
+    }
+    .btns-createPost div{
+        margin-bottom: 20px;
+    }
+}
+
+
+.__line__{
+    width: 100%;
+    height: 1px;
+    background-image: radial-gradient(circle, rgb(128, 128, 128, .3), rgb(128, 128, 128, .1));
+}
+/* preview */
+
+.preview-createPost{
+    background-color: #F5F5F5;
+    height: calc(100vh - 70px);
+    display: flex;
+    justify-content: center;
+    display: none;
+}
+.preview-createPost .body-preview{
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+    height: auto;
+    min-height: 500px;
+    background-color: #fff;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 60px;
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-bottom: 40px;
+}
+
+.body-preview #titlePreview{
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 800;
+    font-size: 34px;
+    line-height: 40px;
+    color: rgba(23, 23, 23, 0.8);
+}
+.body-preview .body-paragraphs{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    height: auto;
+}
+.nav-active{
+    font-weight: bold;
+    color: black;
+}
+
+
+@media (max-width: 1000px){
+    .preview-createPost .body-preview{
+        width: 100%;
+        padding: 25px;
+    }
+}
+
+/* preview */

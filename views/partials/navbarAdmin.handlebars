@@ -9,16 +9,54 @@
     </nav>
     <div class="nav-scroller bg-body shadow-sm">
     <nav class="nav nav-underline" aria-label="Secondary navigation">
-        <a class="nav-link active" aria-current="page" href="/admin/home">Categorias</a>
-        <a class="nav-link" href="/admin/postagens">
-        Postagens
-        <span class="badge bg-light text-dark rounded-pill align-text-bottom">{{posts.length}}</span>
+        <a class="navAdm nav-link active" aria-current="page" href="/admin/home">
+            <span>
+                <p class="m-0">Categorias</p>
+                <span class="badge bg-light text-dark rounded-pill align-text-bottom">{{categories.length}}</span>
+            </span>
+            <div class="__line__adm"></div>
         </a>
-        <a class="nav-link" href="#">Explore</a>
-        <a class="nav-link" href="/admin/clientes">
-        Clientes
-        <span class="badge bg-light text-dark rounded-pill align-text-bottom">{{users.length}}</span>
+        <a class="navAdm nav-link" href="/admin/postagens">
+            <span>
+                <p class="m-0">Postagens</p>
+                <span class="badge bg-light text-dark rounded-pill align-text-bottom">{{posts.length}}</span>
+            </span>        
+            <div class="__line__adm"></div>
+        </a>
+        <a class="navAdm nav-link" href="/admin/clientes">
+            <span>
+                <p class="m-0">Clientes</p>
+                <span class="badge bg-light text-dark rounded-pill align-text-bottom">{{users.length}}</span>
+            </span>
+            <div class="__line__adm"></div>
         </a>
     </nav>
     </div>
 </header>
+
+<style>
+    .badge{
+        width: 10px;
+        height: 10px;
+    }
+    .navAdm{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 5px;
+    }
+    .navAdm span{
+        display: flex;
+        gap: 5px;
+        justify-content: center;
+    }
+    .navAdm:hover{
+        
+    }
+    .__line__adm{
+        height: 2px;
+        background-color: rgb(72, 72, 219);
+        border-radius: 4px;
+        transition: 1s;
+    }
+</style>

@@ -18,15 +18,15 @@ const Post = Schema({
         type: String,
         required: true
     },
-    category: {
+    category: [{}],
+    user:{
         type: Schema.Types.ObjectId,
-        ref: 'categorias',
+        ref: 'usuarios',
         required: true
     },
-    date: {
-        type: Date,
-        default: Date.now()
-    }
-})
+    numberLike:[
+        
+    ]
+}, {timestamps: true})
 
 mongoose.model('posts', Post)

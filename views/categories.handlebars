@@ -1,0 +1,50 @@
+{{>navbar}}
+
+<div class="cardCategories">
+    <div class="headerCategories">
+        <p># Categorias</p>
+        <div class="points">
+            <span style="background-color: #CBC8C8;"></span>
+            <span style="background-color: #A6A1A1;"></span>
+            <span style="background-color: #737373;"></span>
+        </div>
+    </div>
+    <div class="bodyCategories">
+        <div class="cardWithCategories">
+            <div class="searchCategories">
+                <span class="iconSearch">
+                    <img src="/img/searchIcon.png" alt="searchLogo">
+                </span>
+                <span class="inputSearch">
+                    <input id="inputSearch" type="text" placeholder="Pesquise aqui alguma categoria...">
+                </span>
+                <span>
+                    <button>
+                        <img src="/img/loupe.png" alt="search...">
+                    </button>
+                </span>
+            </div>
+            <div class="card_allCategories">
+                <span id="info_allCategories">
+                    <div>
+                        <img src="/img/boxSearch.png" alt="boxSearch">
+                        <p>17 categorias encontradas</p>
+                    </div>
+                    <span id="line"></span>
+                </span>
+                <div class="allCategories">
+                    {{#each categories}}
+                    {{>category}}
+                    {{else}}
+                    <div class="withoutCategories">Nenhuma categoria encontrada</div>
+                    {{/each}}
+                    <div id="noResults">
+                        <span>
+                            Nenhum resultado para a busca
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

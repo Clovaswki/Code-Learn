@@ -22,6 +22,14 @@ const User = Schema({
         type: Boolean,
         default: false
     },
+    idade: {
+        type: String,
+        required: true
+    },
+    descricao: {
+        type: String,
+        required: true
+    },
     filename: {
         type: String,
         required: true
@@ -30,6 +38,9 @@ const User = Schema({
         type: String,
         required: true
     },
+    savePosts: [
+        {type: String}
+    ],
     date: {
         type: Date,
         default: Date.now()

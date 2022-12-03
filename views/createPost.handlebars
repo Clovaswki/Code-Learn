@@ -1,0 +1,105 @@
+<div class="cardFirst-createPost">
+    <div class="navbar-createPost">
+        <div class="d-flex gap-4 align-items-center">
+            <a href="/">
+                <img src="/img/logoCodeLearn.png" alt="logo" width="50px" height="50px">
+            </a>
+            <p class="m-0 h5 opacity-75">Criar Postagem</p>
+        </div>
+        <div class="p-absolute d-flex gap-2 navs-createPost" style="top: 50%; left:80%;">
+            <a href="#" id="navEdit" class="nav-active">Edit</a>
+            <a href="#" id="navPreview">Preview</a>
+        </div>
+        <span id="close-createPost">
+            <img src="/img/close.png" class="opacity-50" alt="close" width="10px" height="10px">
+        </span>
+    </div>
+
+    <div class="body-createPost">
+        <div class="cards-configPost d-flex gap-3 justify-content-center">
+            <div class="card-create">
+                <div class="header-createPost">
+                    <input id="inputTitle" type="text" placeholder="Adicione o título da sua postagem aqui...">
+                    <select name="" id="selectCategories">
+                        <option value="choose">Escolha uma categoria</option>
+                    </select>
+                </div>
+                <span class="tools-formatingPost">
+                    <span id="bold"><img src="/img/toolsCreatePost/bold.png" alt="bold"></span>
+                    <span id="italic"><img src="/img/toolsCreatePost/italic.png" alt="italic"></span>
+                    <span id="link"><img src="/img/toolsCreatePost/link.png" alt="hyperlink"></span>
+                    <span id="codeBlock"><img src="/img/toolsCreatePost/codeBlock.png" alt="code block"></span>
+                    <span id="quote"><img src="/img/toolsCreatePost/quote.png" alt="quote"></span>
+                </span>
+                <div class="content-createPost">
+                    <textarea name="content" rows="8">Escreva aqui o conteúdo do seu post...</textarea>
+                </div>
+            </div>
+            <div class="moreInfo-createPost">
+                <div class="header-moreInfo">
+                    <span class="d-flex align-items-center gap-2">
+                        <img src="/img/hastagTwo.png" class="opacity-75" alt="hastag" height="30px" width="30px">
+                        <p class="m-0 fw-light fs-5">Outras Informações</p>
+                    </span>
+                    <div class="__line__"></div>
+                </div>
+                <div class="inputs-createPost">
+                    <textarea name="description" rows="4">Adicione uma descrição...</textarea>
+                    <input type="text" name="slug" placeholder="slug">
+                </div>
+                <div class="categoriesChoosed">
+                    <div class="__line__"></div>
+                    <div class="d-flex gap-3 align-items-center mt-3">
+                        <p class="m-0 fs-5 fw-light">Categorias selecionadas</p>
+                        <button class="btn btn-outline-danger p-1" style="border-radius: 14px;"
+                            id="removeCategories">Remover</button>
+                    </div>
+                    <div id="all-categoriesChoosed">
+                        {{!-- injection of all categories choosed --}}
+                    </div>
+                    <p class="alertMaxCategories mt-2">5 categorias no máximo !</p>
+                </div>
+            </div>
+        </div>
+        <div class="btns-createPost d-flex justify-content-center">
+            <div class="d-flex gap-2 justify-content-start" style="width: 80%;">
+                <button type="button" class="btn btn-primary btnPublish">Publicar</button>
+                <button type="button" class="btn btn-outline-danger" id="btnRevert">Reverter</button>
+            </div>
+        </div>
+    </div>
+    {{!-- preview --}}
+    <div class="preview-createPost d-flex flex-column align-items-center">
+        <div class="body-preview">
+            <span id="titlePreview"></span>
+            <div class="body-paragraphs">
+
+            </div>
+        </div>
+        <div class="d-flex gap-2 justify-content-start" style="width: 80%; margin-top: -20px;">
+            <button type="button" class="btn btn-primary btnPublish">Publicar</button>
+        </div>
+    </div>
+    {{!-- preview --}}
+</div>
+
+{{!-- modal publish --}}
+<div class="modalCreatePost-publish">
+    <div class="d-flex justify-content-between p-3">
+        <p class="m-0 h5">Publicar</p>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+    </div>
+    <div class="__line__"></div>
+    <div class="contentModal-createPost">
+        
+        {{!-- modal content --}}
+
+    </div>
+    <div class="__line__"></div>
+    <div class="p-2 d-flex justify-content-end">
+        <button type="button" class="btn btn-primary" id="btnModalPublish">Publicar</button>
+    </div>
+    {{!-- modal publish --}}
+</div>
+
+<input type="hidden" value="{{user._id}}" name="userId">
