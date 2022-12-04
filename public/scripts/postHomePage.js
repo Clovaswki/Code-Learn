@@ -77,16 +77,16 @@ const postHomePage = {
             postId = parentNode.getElementsByTagName('input')[0].value,
             query = `?postId=${postId}`
 
-            postHomePage.checkUserIsLiked()
-        try {
-            var response = await requestAPI.get("/set-like" + query)
+            try {
+                var response = await requestAPI.get("/set-like" + query)
+                
+                if(response.status == 204) return location.href = '/login'
+                
+            } catch (error) {
+                console.log(error)
+            }
             
-            if(response.status == 204) return location.href = '/login'
-
-        } catch (error) {
-            console.log(error)
-        }
-
+        postHomePage.checkUserIsLiked()
     },
 
     initPostHomePage: function(){
