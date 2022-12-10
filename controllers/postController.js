@@ -45,8 +45,8 @@ module.exports = {
 
         try {
             var posts = req.query.postId ? 
-            await Post.findOne({_id: req.query.postId})
-            : await Post.find().exec()
+            await Post.findOne({_id: req.query.postId}).populate('user')
+            : await Post.find().populate('user').exec()
 
             if(posts.length > 0 || posts){
                 return res.status(200).json(posts)
@@ -61,24 +61,24 @@ module.exports = {
     },
     setLikePost: async (req, res) => {
 
-        var { userId, postId } = req.query
+        var { postId } = req.query
 
-        var idUser = !userId ? req.user?._id.toString() : userId
+        var userId = req.user?._id.toString()
 
-        if(!userId && !req.user?._id.toString()) return res.status(200).json({status: 204})
+        if(!userId) return res.status(200).json({status: 204})
 
         try{
             
             var post = await Post.findOne({_id: postId}).exec()
 
-            var userLiked = post.numberLike.some( like => like == idUser)
+            var userLiked = post.numberLike.some( like => like == userId)
 
             var setLikes = []
 
             if(userLiked){
-                setLikes = post.numberLike.filter( like => like != idUser)
+                setLikes = post.numberLike.filter( like => like != userId)
             }else{
-                setLikes = [...post.numberLike, idUser]
+                setLikes = [...post.numberLike, userId]
             }
 
             post.numberLike = setLikes
@@ -95,7 +95,11 @@ module.exports = {
     },
     setSavePost: async (req, res) => {
 
-        var { userId, postId } = req.query
+        var { postId } = req.query
+
+        var userId = req.user?._id.toString()
+
+        if(!userId) return res.status(200).json({status: 204})
 
         try {
 
@@ -112,8 +116,10 @@ module.exports = {
             user.savePosts = newPosts_ids
 
             var userSave = await user.save()
+            
+            req.user.savePosts = [...newPosts_ids]
 
-            res.status(200).json(userSave)
+            res.status(200).json(userSave.savePosts)
 
         } catch (error) {
             console.log(error)

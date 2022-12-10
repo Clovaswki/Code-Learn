@@ -155,4 +155,4 @@ var profile = {
     }
 }
 
-profile.initProfile()
+location.pathname == '/perfil' && profile.initProfile()

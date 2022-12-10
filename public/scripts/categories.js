@@ -1,9 +1,9 @@
-var categoryCards = document.getElementsByClassName('category')//all categories
 
-var Categories = {
+const Categories = {
     allCategories: [...document.getElementsByClassName('category')],
     input: document.querySelector('#inputSearch'),
     noResults: document.getElementById('noResults'),
+    categoryCards: document.getElementsByClassName('category'),//all categories
     allPosts: [],
 
     //search category by inputs
@@ -51,7 +51,7 @@ var Categories = {
         await Categories.getAllPosts()
 
         //format date of each category
-        for (var category of categoryCards) {
+        for (var category of this.categoryCards) {
 
             var colors = ['rgb(6, 139, 6)', 'rgb(195, 157, 99)', 'rgb(19, 123, 199)', 'rgb(109, 181, 167)', 'rgb(192, 194, 112)']
 
@@ -77,4 +77,4 @@ var Categories = {
     }
 }
 
-Categories.initCategories()
+location.pathname == '/categories' && Categories.initCategories()

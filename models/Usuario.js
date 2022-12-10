@@ -38,9 +38,7 @@ const User = Schema({
         type: String,
         required: true
     },
-    savePosts: [
-        {type: String}
-    ],
+    savePosts: [''],
     date: {
         type: Date,
         default: Date.now()

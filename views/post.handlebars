@@ -49,6 +49,22 @@
                 
             </div>
         </div>
+
+        {{!-- read next --}}
+        <div class="read-next">
+            <div>
+                <p class="m-0 h4 fw-bold mt-3 ms-4">Leia a seguir</p>
+            </div>
+            <div class="posts-read-next ms-4 mb-3">
+                
+                {{>skeletonPosts}}
+                {{>skeletonPosts}}
+                {{>skeletonPosts}}
+                {{>skeletonPosts}}
+
+            </div>
+        </div>
+
     </div>
     <div class="infoAboutPost">
         <div class="dataOfUser">
@@ -75,6 +91,11 @@
                 <img src="/img/hastagBlack.png" alt="hastag" width="30px" height="30px">
                 <p class="m-0 h6 opacity-75">Mais categorias</p>
             </div>
+            <div class="body-moreCategories">                
+
+                {{>load}}
+   
+            </div>
         </div>
     </div>
 </div>
@@ -83,7 +104,6 @@
 <input type="hidden" value="{{post.createdAt}}" name="createdAt-post">
 <input type="hidden" value="{{post.updatedAt}}" name="updatedAt-post">
 <input type="hidden" value="{{post._id}}" name="postId-post">
-<input type="hidden" value="{{user._id}}" name="userId-post">
 
 <div id="number-like">
     {{#each post.numberLike}}

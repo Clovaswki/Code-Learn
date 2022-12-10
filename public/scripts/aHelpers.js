@@ -12,19 +12,19 @@ const checkFormat = (p) => {
     if (p.includes(bold)) {//text in bold
         word = p.split(bold)
 
-        if(word.length > 3){
-            if(word.indexOf('**') == 0){
-                for(var i = 1; i <= word.length - 1; i+=2){
-                    word[i-1] = "<strong>"+word[i-1]+"</strong>"
+        if (word.length > 3) {
+            if (word.indexOf('**') == 0) {
+                for (var i = 1; i <= word.length - 1; i += 2) {
+                    word[i - 1] = "<strong>" + word[i - 1] + "</strong>"
                 }
                 p = `${word.join(' ')}`
-            }else{
-                for(var i = 1; i <= word.length - 1; i+=2){
-                    word[i] = "<strong>"+word[i]+"</strong>"
+            } else {
+                for (var i = 1; i <= word.length - 1; i += 2) {
+                    word[i] = "<strong>" + word[i] + "</strong>"
                 }
                 p = `${word.join(' ')}`
             }
-        }else{
+        } else {
             word[Math.floor(word.length / 2)] = "<strong>" + word[Math.floor(word.length / 2)] + "</strong>"
             p = `${word.join(' ')}`
         }
@@ -33,19 +33,19 @@ const checkFormat = (p) => {
     if (p.includes(italic)) {//text in italic
         word = p.split(italic)
 
-        if(word.length > 3){
-            if(word.indexOf('__') == 0){
-                for(var i = 1; i <= word.length - 1; i+=2){
-                    word[i-1] = "<i>"+word[i-1]+"</i>"
+        if (word.length > 3) {
+            if (word.indexOf('__') == 0) {
+                for (var i = 1; i <= word.length - 1; i += 2) {
+                    word[i - 1] = "<i>" + word[i - 1] + "</i>"
                 }
                 p = `${word.join(' ')}`
-            }else{
-                for(var i = 1; i <= word.length - 1; i+=2){
-                    word[i] = "<i>"+word[i]+"</i>"
+            } else {
+                for (var i = 1; i <= word.length - 1; i += 2) {
+                    word[i] = "<i>" + word[i] + "</i>"
                 }
                 p = `${word.join(' ')}`
             }
-        }else{
+        } else {
             word[Math.floor(word.length / 2)] = "<i>" + word[Math.floor(word.length / 2)] + "</i>"
             p = `${word.join(' ')}`
         }
@@ -60,7 +60,7 @@ const checkFormat = (p) => {
         var word = p.split(codeBlock)
         var formatingWord = word[Math.floor(word.length / 2)]
         var paragraphs = formatingWord.split('\n').filter(t => t != '')
-        
+
         var block = document.createElement('span')
         block.setAttribute('class', 'codeBlock')
 
@@ -73,25 +73,25 @@ const checkFormat = (p) => {
         p = block
 
     }
-    if(p.includes(link)){
+    if (p.includes(link)) {
         word = p.split(link)
         var getLink = ''
 
-        if(word.length > 3){
-            if(word.indexOf('++') == 0){
-                for(var i = 1; i <= word.length - 1; i+=2){
-                    getLink = word[i-1].split('[')[1].split(']')[0]
-                    word[i-1] = `<a href='${getLink}'>${word[i-1].split('[')[0]}</a>`
+        if (word.length > 3) {
+            if (word.indexOf('++') == 0) {
+                for (var i = 1; i <= word.length - 1; i += 2) {
+                    getLink = word[i - 1].split('[')[1].split(']')[0]
+                    word[i - 1] = `<a href='${getLink}'>${word[i - 1].split('[')[0]}</a>`
                 }
                 p = `${word.join(' ')}`
-            }else{
-                for(var i = 1; i <= word.length - 1; i+=2){
-                    getLink = word[i-1].split('[')[1].split(']')[0]
+            } else {
+                for (var i = 1; i <= word.length - 1; i += 2) {
+                    getLink = word[i].split('[')[1].split(']')[0]
                     word[i] = `<a href='${getLink}'>${word[i].split('[')[0]}</a>`
                 }
                 p = `${word.join(' ')}`
             }
-        }else{
+        } else {
             getLink = word[Math.floor(word.length / 2)].split('[')[1].split(']')[0]
             word[Math.floor(word.length / 2)] = `<a href='${getLink}'>` + word[Math.floor(word.length / 2)].split('[')[0] + "</a>"
             p = `${word.join(' ')}`
@@ -107,23 +107,23 @@ const formatDate = (currentDate) => {
 
     var date = new Date(Date.parse(currentDate)),
 
-    formatDay = date.getDate().toString().length === 1 ?
-    '0' + date.getDate().toString() : date.getDate(),
-    
-    month = date.getMonth() + 1,
-    
-    formatMonth = month.toString().length === 1 ?
-    '0' + month.toString() : month,
-    
-    format = `${formatDay}/${formatMonth}/${date.getFullYear()}`
-    
+        formatDay = date.getDate().toString().length === 1 ?
+            '0' + date.getDate().toString() : date.getDate(),
+
+        month = date.getMonth() + 1,
+
+        formatMonth = month.toString().length === 1 ?
+            '0' + month.toString() : month,
+
+        format = `${formatDay}/${formatMonth}/${date.getFullYear()}`
+
     return format
 }
 
 //request to api of system
 const requestAPI = {
     //baseURL: 'http://localhost:3000',
-    baseURL: "https://"+location.host,
+    baseURL: "http://" + location.host,
     post: async (endpoint, body) => {
 
         var headers = {
@@ -136,11 +136,15 @@ const requestAPI = {
             body: JSON.stringify(body)
         }
 
-        var response = await fetch(requestAPI.baseURL+endpoint, headers)
+        try {
+            var response = await fetch(requestAPI.baseURL + endpoint, headers)
 
-        var data = await response.json()
+            var data = await response.json()
 
-        return data
+            return data
+        } catch (error) {
+            return error
+        }
     },
     get: async (endpoint) => {
 
@@ -150,19 +154,23 @@ const requestAPI = {
             headers: myHeaders,
             mode: 'cors',
             cache: 'default'
-        } 
+        }
 
-        var response = await fetch(requestAPI.baseURL+endpoint, headers)
+        try {
+            var response = await fetch(requestAPI.baseURL + endpoint, headers)
 
-        var data = await response.json()
+            var data = await response.json()
 
-        return data
-        
+            return data
+        } catch (error) {
+            return error
+        }
+
     }
 }
 
 //post component
-var postComponent = function(data){
+var postComponent = function (data) {
 
     var { img, username, title, date, postId } = data
 
@@ -190,3 +198,54 @@ var postComponent = function(data){
     </a>
     `
 }
+
+//styles css
+var styles = function (obj, atrs) {
+    var style = []
+    Object.entries(atrs).forEach(([key, value]) => {
+        style.push(`${key}:${value};`)
+        obj.setAttribute('style', `${style.join(' ')}`)
+    })
+    style = []
+}
+
+
+
+//data of user authenticated
+const auth = {
+    checkAuth: async function () {
+
+        try {
+
+            var response = await requestAPI.get('/check-auth')
+
+            if (response.auth) {
+                auth.setUserLocalStorage(response.user)
+            }
+            else if (!response.auth) {
+                auth.setUserLocalStorage(null)
+            }
+
+        } catch (error) {
+            console.log(error)
+            auth.setUserLocalStorage(null)
+        }
+
+    },
+    setUserLocalStorage: function (user) {
+
+        localStorage.setItem('user-codeLearn', user ? JSON.stringify(user) : null)
+
+    },
+    getUserLocalStorage: function () {
+
+        var user = localStorage.getItem('user-codeLearn')
+        var data = JSON.parse(user)
+        return data
+
+    }
+
+}
+
+auth.checkAuth()
+

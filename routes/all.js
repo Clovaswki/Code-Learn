@@ -2,20 +2,23 @@ const express = require('express')
 const router = express.Router()
 
 //controllers
-    //controller category
-    const {
-        getCategories
-    } = require('../controllers/categoryController')
-    //controllers post
-    const {
-        putPost, 
-        getPost,
-        setLikePost,
-        setSavePost,
-        getPostsByUser
-    } = require('../controllers/postController')
+//controller category
+const {
+    getCategories
+} = require('../controllers/categoryController')
+//controllers post
+const {
+    putPost, 
+    getPost,
+    setLikePost,
+    setSavePost,
+    getPostsByUser
+} = require('../controllers/postController')
 
-    //categories
+//controllers auth
+const { checkAuth } = require('../controllers/authController')
+    
+//categories
         //get all categories
         router.get('/get-categories', getCategories)
 
@@ -35,5 +38,8 @@ const router = express.Router()
         //get posts created by user
         router.get('/get-postsByUser/:userId', getPostsByUser)
 
+    //user
+        //check authentication
+        router.get('/check-auth', checkAuth)
         
 module.exports = router

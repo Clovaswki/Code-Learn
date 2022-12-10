@@ -188,19 +188,18 @@
             }
         })
 
-        //grupo de rotas do usuario
+        //routes group from user
         app.use('/', usuarioRoutes)
 
-        //grupo de rotas admin
+        //routes group admin
         app.use('/admin', adminRoutes)
 
-        //grupo de rotas para operações de crud
+        //routes group to crud operations
         app.use('/', crudRoutes)
 
 
-//API rodando na defaultPort
+//API listening on the default port
     const defaultPort = process.env.PORT || 3000
     app.listen(defaultPort, () => {
         console.log("Servidor rodando na url http://localhost:3000")
     })
-

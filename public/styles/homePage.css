@@ -1,19 +1,22 @@
 @import url('https://fonts.googleapis.com/css2?family=Assistant:wght@500&family=Ubuntu&display=swap');
 
 /*Navbar*/
-.navbar{
+.navbar {
     height: 70px;
 }
-.logo{
+
+.logo {
     width: 50px;
     border-radius: 5px;
 }
-.navMedia{
+
+.navMedia {
     visibility: hidden;
     display: none;
 }
-@media (max-width: 900px){
-    .navMedia{ 
+
+@media (max-width: 900px) {
+    .navMedia {
         visibility: hidden;
         overflow-y: scroll;
         height: 0vh;
@@ -23,18 +26,22 @@
         z-index: 1;
         display: block;
     }
-    .show{
+
+    .show {
         visibility: visible;
         overflow-y: auto;
         height: calc(100vh - 70px);
     }
-    .btnsNav{
+
+    .btnsNav {
         margin-top: 20px;
     }
-    .btnsNav li{
+
+    .btnsNav li {
         padding: 5px;
     }
-    .btnsNav a{
+
+    .btnsNav a {
         text-decoration: none;
         color: lightgrey;
         border: 0;
@@ -42,43 +49,46 @@
         display: block;
         margin-left: -28px;
     }
-    .btnsNav a:focus{
+
+    .btnsNav a:focus {
         border: 3px solid green;
         border-radius: 5px;
-        
+
     }
 }
 
-.nav-component{
+.nav-component {
     display: flex;
     flex-direction: column;
 }
-.nav-component .line{
+
+.nav-component .line {
     width: 0%;
     height: 2px;
     background-color: gray;
     transition: 1s;
 }
 
-.btnProfile{
+.btnProfile {
     border-radius: 14px;
     padding: 2px;
     margin-top: -5px;
     cursor: pointer;
 }
-.btnProfile:hover{
+
+.btnProfile:hover {
     background-color: rgba(214, 206, 206, 0.2);
 }
 
 /*Navbar*/
 
 /*Card principal do home page*/
-.row{
+.row {
     --bs-gutter-x: 0;
 }
 
 /* card fist */
-.roleCategories{
+.roleCategories {
     background-color: #ffff;
     height: 45px;
     display: flex;
@@ -86,25 +96,28 @@
     align-items: center;
     gap: 10px;
 }
-.roleCategories p{
+
+.roleCategories p {
     margin: 0;
     font-weight: 700;
     font-size: 18px;
-    font-family: 'Ubuntu',Arial, Helvetica, sans-serif;
+    font-family: 'Ubuntu', Arial, Helvetica, sans-serif;
 }
-.roleCategories p:hover{
+
+.roleCategories p:hover {
     color: #583d9c;
     cursor: pointer;
 }
 
-.cardFirst{
+.cardFirst {
     width: 100%;
     height: 400px;
     background-color: #75679B;
     display: flex;
     justify-content: space-between;
 }
-.cardFirst .textShowBlog{
+
+.cardFirst .textShowBlog {
     height: 100%;
     width: 50%;
     display: flex;
@@ -112,18 +125,40 @@
     align-items: center;
     color: #ffff;
 }
-.textShowBlog span{
+
+.textShowBlog span {
     height: 70%;
     width: 50%;
 }
-.textShowBlog span p{
+
+.textShowBlog span p {
     font-size: 20px;
     line-height: 22px;
 }
-.textShowBlog span h2{
+
+.textShowBlog span h2 {
     margin-bottom: 1.5rem;
+    /* font-family: monospace; */
+    border-right: 4px solid;
+    width: 10ch;
+    white-space: nowrap;
+    overflow: hidden;
+    animation: typing 2s steps(10), blinking 0.5s infinite step-end alternate;
 }
-.cardFirst .logoCard{
+
+@keyframes typing {
+    from {
+        width: 0;
+    }
+}
+
+@keyframes blinking {
+    50% {
+        border-color: transparent;
+    }
+}
+
+.cardFirst .logoCard {
     height: 100%;
     width: 50%;
     display: flex;
@@ -131,23 +166,59 @@
     align-items: center;
 }
 
-.cardFirst .logoCard span{
+.cardFirst .logoCard span {
     background: url(/img/binaryTwo.png);
+    background-size: 100% 200%;
     height: 70%;
     width: 50%;
     border-radius: 24px;
     display: flex;
     justify-content: center;
     align-items: center;
-}
-.logoCard span img{
-    transition: 1s;
-}
-.logoCard span img:hover{
-    transform: scale(1.5, 1.5) rotate(360deg);
+    animation: moveBackgroundLogoCard 5s infinite alternate;
 }
 
-.btnRegister{
+@keyframes moveBackgroundLogoCard {
+    0% {
+        background-position-y: 50%;
+    }
+
+    25% {
+        background-position-y: 100%;
+    }
+
+    75% {
+        background-position-y: 150%;
+    }
+
+    100% {
+        background-position-y: 200%;
+    }
+}
+
+.logoCard span img {
+    animation: moveImgLogoCard 2s infinite alternate-reverse;
+}
+
+@keyframes moveImgLogoCard {
+    0% {
+        transform: translate(10%, 10%) rotate(25deg) scale(1.2);
+    }
+
+    25% {
+        transform: translate(-10%, -10%) rotate(-25deg) scale(1);
+    }
+
+    75% {
+        transform: translate(10%, 10%) rotate(25deg) scale(1.2);
+    }
+
+    100% {
+        transform: translate(-10%, 10%) rotate(-25deg) scale(1);
+    }
+}
+
+.btnRegister {
     border: 0;
     padding: 10px 40px 10px 20px;
     background-color: #5F95E8;
@@ -157,27 +228,32 @@
     color: #ffff;
     transition: 1s;
 }
-.btnRegister img{
+
+.btnRegister img {
     width: 27px;
     height: 27px;
 }
-.btnRegister:hover{
+
+.btnRegister:hover {
     gap: 3rem;
 }
 
-@media (max-width: 800px){
-    .roleCategories{
+@media (max-width: 800px) {
+    .roleCategories {
         display: none;
     }
-    .cardFirst{
+
+    .cardFirst {
         display: flex;
         justify-content: flex-start;
         padding: none;
     }
-    .cardFirst .textShowBlog{   
+
+    .cardFirst .textShowBlog {
         width: 100%;
     }
-    .textShowBlog span{
+
+    .textShowBlog span {
         padding: 1rem;
         height: 100%;
         width: 100%;
@@ -187,22 +263,26 @@
         justify-content: center;
         gap: 2rem;
     }
-    .textShowBlog span p{
+
+    .textShowBlog span p {
         width: 80%;
         text-align: center;
     }
-    .textShowBlog span h2{
+
+    .textShowBlog span h2 {
         font-size: 2em;
     }
-    .cardFirst .logoCard{
+
+    .cardFirst .logoCard {
         display: none;
     }
 }
+
 /* card fist */
 
 
 /*Card secundário*/
-.card2{
+.card2 {
     background-image: url(/img/test.jpg);
     background-size: cover;
     backdrop-filter: brightness(100%);
@@ -210,33 +290,39 @@
     display: flex;
 }
 
-@media (max-width: 1030px){
-    .card2{
+.artCard {
+    border-radius: 10px;
+    transition: 1s;
+}
+.artCard:hover{
+    transform: translateY(-2%);
+}
+
+@media (max-width: 1030px) {
+    .card2 {
         flex-direction: column;
     }
 }
 
-.novidadeBackground{
+.novidadeBackground {
     background-image: url('/img/developer_4x.gif');
 }
 
-.categoriaBackground{
+.categoriaBackground {
     background-image: url('/img/languages.jpg');
 }
 
-.artCard{
-    border-radius: 10px;
-}
-
-.categoriesOfEachPost{
+.categoriesOfEachPost {
     padding: 6px 0;
     display: flex;
     gap: 15px;
 }
-.categoriesOfEachPost a{
+
+.categoriesOfEachPost a {
     text-decoration: none;
 }
-.categoriesOfEachPost a p{
+
+.categoriesOfEachPost a p {
     background-color: rgb(211, 211, 211, .4);
     color: gray;
     margin: 0;
@@ -245,7 +331,8 @@
     border-radius: 5px;
     box-shadow: 1px 1px 7px rgba(214, 206, 206, 0.1);
 }
-.categoriesOfEachPost a p:hover{
+
+.categoriesOfEachPost a p:hover {
     transform: scale(1.05, 1.05) translate(-5%, -5%);
 }
 

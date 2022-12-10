@@ -102,4 +102,4 @@ const postHomePage = {
 
 }
 
-postHomePage.initPostHomePage()
+location.pathname == '/' && postHomePage.initPostHomePage()

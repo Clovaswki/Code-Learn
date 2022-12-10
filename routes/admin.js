@@ -287,64 +287,50 @@ const fs = require('fs')
                 })
             })
         })
-        //rota de add de posts
-        router.get('/addpost', (req, res) => {
-            User.find().then((users) => {
-                Post.find().then((posts) => {
-                    Category.find().then((categories) => {
-                        res.render('admin/addposts', {categories: categories, users: users, posts: posts})
-                    })
-                })
-            })
-        })
-        //rota post add posts
-        router.post('/addpost', (req, res) => {
-            var erros = []
-            var title = req.body.title,
-                description = req.body.description,
-                slug = req.body.slug,
-                category = req.body.category,
-                content = req.body.content
 
-            if(!title || typeof title == undefined || title == null){
-                erros.push({text: 'Título inválido!'})
-            }
-            if(!description || typeof description == undefined || description == null){
-                erros.push({text: 'Descrição inválida!'})
-            }
-            if(!slug || typeof slug  == undefined || slug == null){
-                erros.push({text: 'SLug inválida!'})
-            }
-            if(!content || typeof content == undefined || content == null){
-                erros.push({text: 'Conteúdo inválido!'})
-            }
-            if(title.length < 3){
-                erros.push({text: 'Título pequeno!'})
-            }
-            if(content.length < 80){
-                erros.push({text: 'Conteúdo pequeno!'})
-            }
-            if(erros.length > 0){
-                res.render('admin/addposts', {erros: erros})
-            }else{
+        //route edit post
+        router.get('/editpost/:id', async (req, res) => {
 
-                var newPost = {
-                    title: title,
-                    description: description,
-                    slug: slug,
-                    content: content,
-                    category: category
+            var { id } = req.params
+
+            try {
+              
+                var post = await Post.findOne({_id: id}).exec()
+
+                if(post){
+                    return res.render('admin/editPost', {post: post}) 
                 }
 
-                new Post(newPost).save().then(() => {
-                    req.flash('success', 'Postagem criada')
-                    res.redirect('/admin/postagens')
-                }).catch((err) => {
-                    req.flash('error', 'Erro ao criar postagem')
-                    res.redirect('/admin/addpost')
-                })
-
+                res.redirect('/404')
+                
+            } catch (error) {
+                res.status(500).redirect('/404')
             }
+
+
         })
+
+        router.post('/editpost/:id', async (req, res) => {
+
+            var { title, content } = req.body
+
+            try {
+                
+                var post = await Post.findOneAndUpdate({_id: req.params.id}, {$set: {
+                    title: title,
+                    content: content
+                }})
+
+                res.status(200).redirect('/admin/postagens')
+
+            } catch (error) {
+                console.log(error)
+                req.flash('error', 'erro na alteração')
+                res.status(500).redirect('/admin/postagens')
+            }
+
+        })
+
+   
 
 module.exports = router
