@@ -17,6 +17,16 @@
     display: none;
 }
 
+.buttonsPostMobile span{
+    padding: .8rem;
+    border-radius: 4px;
+}
+.buttonsPostMobile span:hover, .buttonsPostMobile span:focus{
+    background-color:  rgb(93, 91, 212, .1);
+    transform: scale(1.1, 1.1);
+    filter: drop-shadow(1px 1px 5px rgba(53, 66, 143, 0.9));
+}
+
 .buttonsPost .btnsFirst {
     margin-top: 30px;
     margin-left: 70px;

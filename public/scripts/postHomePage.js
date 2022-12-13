@@ -89,11 +89,30 @@ const postHomePage = {
         postHomePage.checkUserIsLiked()
     },
 
+    formatDescription: function(){
+
+        var charLimit = 35
+
+        this.postsHomePage.forEach( post => {
+
+            var description = post.querySelector('.userInfo-postHomePage small')
+
+            if(description.innerText.length > charLimit){
+                var newDescription = description.innerText.slice(0, charLimit - 1 )
+                description.innerHTML = `${newDescription}...`
+            }
+
+        })
+
+    },
+
     initPostHomePage: function(){
 
         postHomePage.applyRandomColorsInCategories()
 
         postHomePage.formatDate()
+
+        postHomePage.formatDescription()
 
         postHomePage.btnsLike.forEach( btn => btn.addEventListener('click', postHomePage.setLike))
 

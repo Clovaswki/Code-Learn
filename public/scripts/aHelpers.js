@@ -123,7 +123,7 @@ const formatDate = (currentDate) => {
 //request to api of system
 const requestAPI = {
     //baseURL: 'http://localhost:3000',
-    baseURL: "http://" + location.host,
+    baseURL: location.protocol + "//" + location.host,
     post: async (endpoint, body) => {
 
         var headers = {
@@ -167,6 +167,22 @@ const requestAPI = {
         }
 
     }
+}
+
+//random items
+const randomItems = function (data, limitItems) {
+    var length = data.length
+    var item = data[Math.floor(Math.random() * length)]
+    var array = []
+
+    for(var i=0; i < limitItems; i++){
+        while (array.includes(item)) {
+            item = data[Math.floor(Math.random() * length)]
+        }
+        array.push(item)
+    }
+
+    return array
 }
 
 //post component

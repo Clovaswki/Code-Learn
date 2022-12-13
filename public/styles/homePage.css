@@ -71,12 +71,14 @@
 
 .btnProfile {
     border-radius: 14px;
-    padding: 2px;
+    padding: 5px;
     margin-top: -5px;
     cursor: pointer;
+    transition: 200ms;
 }
 
 .btnProfile:hover {
+    transform: scale(1.1, 1.1);
     background-color: rgba(214, 206, 206, 0.2);
 }
 
@@ -288,6 +290,12 @@
     backdrop-filter: brightness(100%);
     padding: 30px;
     display: flex;
+}
+
+@media (max-width: 600px){
+    .card2{
+        padding: 0;
+    }
 }
 
 .artCard {

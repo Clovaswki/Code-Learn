@@ -13,7 +13,7 @@
           {{#if userAuth}}
           <a href="/perfil" style="text-decoration: none;">
             <div class="d-flex btnProfile">
-              <img src="data:image/jpg;base64,{{user.file}}" alt="user" width="45px" height="45px" class="rounded-circle" style="object-fit: cover;">
+              <img id="imgNavbarUser" src="data:image/jpg;base64,{{user.file}}" alt="user" width="40px" height="40px" class="rounded-circle" style="object-fit: cover;">
               <p class="text-white my-auto nav-link fw-bold">Olá, {{user.nome}}</p>
             </div>
           </a>
@@ -44,6 +44,13 @@
     </div>
   </div>
 </nav>
+
+<style>
+  #imgNavbarUser{
+    outline: 2px solid rgb(105, 65, 179, .3);
+    outline-offset: 2px;
+  }
+</style>
 
  <!--media queries-->
     <div class="navMedia bg-dark"  style="z-index: 1000;">

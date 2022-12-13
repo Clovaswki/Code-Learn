@@ -40,12 +40,14 @@
 .postHomePage div{
     display: flex;
     gap: 10px;
+    flex-wrap: wrap;
 }
 
 .buttons-postHomePage{
     padding: 20px 70px 20px 70px;
     display: flex;
     justify-content: space-between;
+    align-items: center;
 }
 
 .btnLike-postHomePage{

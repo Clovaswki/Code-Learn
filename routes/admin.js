@@ -158,21 +158,6 @@ const fs = require('fs')
                 {email: search}
             ]
 
-            /*userInfos.map(async(userInfo) => {
-    
-                var users = await User.find(userInfo)
-                
-                try{
-                    if(users.length > 0){
-                        req.flash('search', users)
-                        return res.redirect('/admin/clientes')
-                    }
-                }catch(err){
-                    console.log("Errinho: "+err)
-                }
-
-            })*/
-
             for(var i = 0; i < userInfos.length; i++){    
                 
                 var users = await User.find(userInfos[i])
@@ -282,7 +267,7 @@ const fs = require('fs')
         //rota de posts
         router.get('/postagens', (req, res) => {
             User.find().then((users) => {
-                Post.find().populate("category").sort({date: 'desc'}).then((posts) => {
+                Post.find().populate("user").sort({date: 'desc'}).then((posts) => {
                     res.render('admin/posts', {posts: posts, users: users})
                 })
             })
@@ -312,13 +297,14 @@ const fs = require('fs')
 
         router.post('/editpost/:id', async (req, res) => {
 
-            var { title, content } = req.body
+            var { title, content, description } = req.body
 
             try {
                 
                 var post = await Post.findOneAndUpdate({_id: req.params.id}, {$set: {
                     title: title,
-                    content: content
+                    content: content,
+                    description: description
                 }})
 
                 res.status(200).redirect('/admin/postagens')

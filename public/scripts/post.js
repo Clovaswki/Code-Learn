@@ -24,30 +24,28 @@ var fieldDates = document.querySelector('#infoUserPost div small')
 //number like
 var cardLikes = document.getElementById('number-like')
 
-//element number of likes
-var numberOfLikes = btnLike.getElementsByTagName('small')[0]
-
 const cardPost = {
     //dates
     updated: formatDate(dateUpdated.value),
     created: formatDate(dateCreated.value),
-    likeEmpty: 'http://localhost:3000/img/btnLike.svg',
-    likePress: 'http://localhost:3000/img/btnLikePress.svg',
-    saveEmpty: 'http://localhost:3000/img/btnSave.svg',
-    savePress: 'http://localhost:3000/img/btnSavePress.svg',
+    btnLikeMobile: document.getElementById('btn-like-mobile'),
+    likeEmpty: requestAPI.baseURL+'/img/btnLike.svg',
+    likePress: requestAPI.baseURL+'/img/btnLikePress.svg',
+    saveEmpty: requestAPI.baseURL+'/img/btnSave.svg',
+    savePress: requestAPI.baseURL+'/img/btnSavePress.svg',
     ids_likes: [],
     bodyMoreCategories: document.getElementsByClassName('body-moreCategories')[0],
     postsReadNext: document.getElementsByClassName('posts-read-next')[0],
     colors: ['#bb3939', '#4623df', '#33c575', '#cbce41', '#c560c0'],
     months: ['', 'Jan', 'Fev', 'Mar', 'Abril', 'Maio', 'Jun', 'Jul', 'Agosto', 'Set', 'Out', 'Nov', 'Dez'],
 
-    checkLikeOfUser: () => {
+    checkLikeOfUser: (btn) => {
 
         var isLike = cardPost.ids_likes.some(id => id == userId.value)
 
         isLike
-            ? btnLike.children[0].src = cardPost.likePress
-            : btnLike.children[0].src = cardPost.likeEmpty
+            ? btn.children[0].src = cardPost.likePress
+            : btn.children[0].src = cardPost.likeEmpty
 
     },
 
@@ -76,13 +74,13 @@ const cardPost = {
 
     },
 
-    setCountNumberLikes: () => {
-        btnLike.children[0].src == cardPost.likePress
-            ? btnLike.children[1].innerText = parseInt(btnLike.children[1].innerText) + 1
-            : btnLike.children[1].innerText = parseInt(btnLike.children[1].innerText) - 1
+    setCountNumberLikes: (btn) => {
+        btn.children[0].src == cardPost.likePress
+            ? btn.children[1].innerText = parseInt(btn.children[1].innerText) + 1
+            : btn.children[1].innerText = parseInt(btn.children[1].innerText) - 1
     },
 
-    setLike: async () => {
+    setLike: async (event) => {
 
         var queryLike = `?postId=${postId.value}`
 
@@ -99,7 +97,7 @@ const cardPost = {
             }
 
             cardPost.checkLikeOfUser()
-            cardPost.setCountNumberLikes()
+            cardPost.setCountNumberLikes(event.target)
 
             try {
                 var response = await requestAPI.get("/set-like" + queryLike)
@@ -150,6 +148,8 @@ const cardPost = {
                 })
 
                 var maxLoop = categories.length > 9 ? 9 : categories.length 
+
+                categories = randomItems(categories, maxLoop)
 
                 for(var i = 0; i < maxLoop; i++){
 
@@ -206,7 +206,7 @@ const cardPost = {
 
             var limitPosts = 4
 
-            //under construction - random posts
+            posts = randomItems(posts, limitPosts)
             
             if(posts || posts.length > 0){
                 for(var i = 0; i < limitPosts; i++){    
@@ -285,7 +285,9 @@ const cardPost = {
         cardPost.getIdsOfLikes()
 
         //check if user is like
-        cardPost.checkLikeOfUser()
+        for(var btnOfLike of [btnLike, cardPost.btnLikeMobile]){
+            cardPost.checkLikeOfUser(btnOfLike)
+        }
 
         //check if user is save
         cardPost.checkPostSaveOfUser()
@@ -299,6 +301,7 @@ const cardPost = {
 
         //event listener - button like post
         btnLike.addEventListener('click', cardPost.setLike)
+        cardPost.btnLikeMobile.addEventListener('click', cardPost.setLike)
         
         //event listener - button save post
         btnSave.addEventListener('click', cardPost.setSave)
