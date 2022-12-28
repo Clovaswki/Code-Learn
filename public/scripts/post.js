@@ -46,7 +46,7 @@ const cardPost = {
         isLike
             ? btn.children[0].src = cardPost.likePress
             : btn.children[0].src = cardPost.likeEmpty
-
+        
     },
 
     checkPostSaveOfUser: () => {
@@ -66,7 +66,7 @@ const cardPost = {
 
     getIdsOfLikes: () => {
 
-        var inputsOfIds = [...cardLikes.getElementsByTagName('input')]
+        let inputsOfIds = [...cardLikes.getElementsByTagName('input')]
 
         cardPost.ids_likes = inputsOfIds.map(input => {
             return input.value
@@ -75,9 +75,12 @@ const cardPost = {
     },
 
     setCountNumberLikes: (btn) => {
-        btn.children[0].src == cardPost.likePress
-            ? btn.children[1].innerText = parseInt(btn.children[1].innerText) + 1
-            : btn.children[1].innerText = parseInt(btn.children[1].innerText) - 1
+
+
+            btn.children[0].src == cardPost.likePress
+                ? btn.children[1].innerText = parseInt(btn.children[1].innerText) + 1
+                : btn.children[1].innerText = parseInt(btn.children[1].innerText) - 1
+        
     },
 
     setLike: async (event) => {
@@ -196,7 +199,7 @@ const cardPost = {
         `
     },
 
-    //get posts to read next
+    //get posts to read next component
     getPosts: async function(){
 
         try {
