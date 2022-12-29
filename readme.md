@@ -27,3 +27,9 @@ the main dependencies needed in the project are specified below:
     npm run dev - start the app from development
 
 ## execution
+
+![home page](https://i.ibb.co/cNKMGsd/blog-home-Page.png)
+
+![categories page](https://i.ibb.co/N3tsbPf/blog-categories.png)
+
+![posts](https://i.ibb.co/LZdynqx/blog-posts.png)

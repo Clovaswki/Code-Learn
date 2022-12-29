@@ -15,9 +15,6 @@ var btnLike = document.getElementById('btn-like')
 var btnSave = document.getElementById('btn-save')
 var btns = [btnLike, btnSave]
 
-var save = false
-var like = false
-
 //info of user
 var fieldDates = document.querySelector('#infoUserPost div small')
 
@@ -29,6 +26,7 @@ const cardPost = {
     updated: formatDate(dateUpdated.value),
     created: formatDate(dateCreated.value),
     btnLikeMobile: document.getElementById('btn-like-mobile'),
+    btnSaveMobile: document.getElementById('btn-save-mobile'),
     likeEmpty: requestAPI.baseURL+'/img/btnLike.svg',
     likePress: requestAPI.baseURL+'/img/btnLikePress.svg',
     saveEmpty: requestAPI.baseURL+'/img/btnSave.svg',
@@ -39,31 +37,6 @@ const cardPost = {
     colors: ['#bb3939', '#4623df', '#33c575', '#cbce41', '#c560c0'],
     months: ['', 'Jan', 'Fev', 'Mar', 'Abril', 'Maio', 'Jun', 'Jul', 'Agosto', 'Set', 'Out', 'Nov', 'Dez'],
 
-    checkLikeOfUser: (btn) => {
-
-        var isLike = cardPost.ids_likes.some(id => id == userId.value)
-
-        isLike
-            ? btn.children[0].src = cardPost.likePress
-            : btn.children[0].src = cardPost.likeEmpty
-        
-    },
-
-    checkPostSaveOfUser: () => {
-        btnSave.children[0].src = cardPost.savePress
-        btnSave.children[0].src = cardPost.saveEmpty
-        
-        var user = auth.getUserLocalStorage()
-        
-        if(user){
-
-            //under construction
-            
-            console.log(auth.getUserLocalStorage().savePosts)
-
-        }
-    },
-
     getIdsOfLikes: () => {
 
         let inputsOfIds = [...cardLikes.getElementsByTagName('input')]
@@ -73,44 +46,67 @@ const cardPost = {
         })
 
     },
+    
+    checkLikeOfUser: (btn) => {
 
-    setCountNumberLikes: (btn) => {
+        let buttonElement = btn
 
+        if(btn.hasAttribute('src') || btn.children.length == 0){
+            buttonElement = btn.parentNode
+        }
 
-            btn.children[0].src == cardPost.likePress
-                ? btn.children[1].innerText = parseInt(btn.children[1].innerText) + 1
-                : btn.children[1].innerText = parseInt(btn.children[1].innerText) - 1
-        
+        buttonElement.getElementsByTagName('small')[0].innerHTML = cardPost.ids_likes.length
+
+        if(cardPost.ids_likes.includes(userId.value)){
+            buttonElement.getElementsByTagName('img')[0].src = cardPost.likePress
+        }else{
+            buttonElement.getElementsByTagName('img')[0].src = cardPost.likeEmpty
+        }
+
     },
-
+    
     setLike: async (event) => {
 
         var queryLike = `?postId=${postId.value}`
 
-        if (userId.value) {
+        if (!userId.value) {
+            return window.location.href = '/login'
+        } 
+        
+        //check if user liked or not
+        cardPost.ids_likes.includes(userId.value)
+        ? cardPost.ids_likes = cardPost.ids_likes.filter( l => l != userId.value)
+        : cardPost.ids_likes = [...cardPost.ids_likes, userId.value]
 
-            like = !like
+        cardPost.checkLikeOfUser(event.target)
 
-            if(cardPost.ids_likes.length == 0){
-                cardPost.ids_likes = [...cardPost.ids_likes, userId.value]
-            }else{
-                like
-                    ? cardPost.ids_likes = cardPost.ids_likes.filter(id => id != userId.value)
-                    : cardPost.ids_likes = [...cardPost.ids_likes, userId.value]
-            }
-
-            cardPost.checkLikeOfUser()
-            cardPost.setCountNumberLikes(event.target)
-
-            try {
-                var response = await requestAPI.get("/set-like" + queryLike)
-            } catch (error) {
-                console.log(error)
-            }
-
-        } else {
-            window.location.href = '/login'
+        try {
+            await requestAPI.get("/set-like" + queryLike)
+        } catch (error) {
+            console.log(error)
         }
+    },
+
+    checkPostSaveOfUser: () => {
+        
+        let user = auth.getUserLocalStorage()
+        
+        let user_posts = user.savePosts
+
+        let isSaved = user_posts.some( p => p == postId.value)
+
+        isSaved
+        ? user.savePosts = user_posts.filter( p => p != postId.value)
+        : user.savePosts = [...user_posts, postId.value]
+            
+        auth.setUserLocalStorage(user)
+        
+        for( var btn of [btnSave, cardPost.btnSaveMobile]){
+            isSaved
+            ? btn.children[0].src = cardPost.saveEmpty
+            : btn.children[0].src = cardPost.savePress
+        }
+       
     },
 
     //save the post on the user authenticated
@@ -122,13 +118,10 @@ const cardPost = {
             return window.location.href = '/login'
         }
 
-        save = !save
-
         cardPost.checkPostSaveOfUser()
 
         try {
-            var response = await requestAPI.get('/set-save'+query)
-            // console.log(response)
+            await requestAPI.get('/set-save'+query)
         } catch (error) {
             console.log(error)
         }
@@ -254,22 +247,37 @@ const cardPost = {
 
         })
     },
-    //effect of buttons
-    hoverEffectBtns: (event) => {
-        var urlServer = requestAPI.baseURL
-        var likeEmpty = urlServer + '/img/btnLike.svg',
-            saveEmpty = urlServer + '/img/btnSave.svg',
-            likePress = urlServer + '/img/btnLikePress.svg',
-            savePress = urlServer + '/img/btnSavePress.svg'
 
-        var button = event.target
+    checkLikeAndSave: () => {
+        let btns_like = [
+            btnLike.getElementsByTagName('img')[0], 
+            cardPost.btnLikeMobile.getElementsByTagName('img')[0]
+        ]
 
-        if (button.id == 'btn-like') {
-            if (like) button.children[0].src = event.type == 'mouseover' ? likePress : likeEmpty
-        } else {
-            if (save) button.children[0].src = event.type == 'mouseover' ? savePress : saveEmpty
+        let btns_save = [
+            btnSave.getElementsByTagName('img')[0],
+            cardPost.btnSaveMobile.getElementsByTagName('img')[0]
+        ]
+
+        var user = auth.getUserLocalStorage()
+
+        if(user){
+            btns_save.forEach( btn => {
+                
+                btn.src = user.savePosts.includes(postId.value)
+                ? cardPost.savePress
+                : cardPost.saveEmpty
+    
+            })
         }
 
+        btns_like.forEach( btn => {
+            
+            btn.src = cardPost.ids_likes.includes(userId.value)
+            ? cardPost.likePress
+            : cardPost.likeEmpty
+
+        })
     },
 
     initPost: () => {
@@ -278,29 +286,17 @@ const cardPost = {
         //content post
         cardPost.formatingContentPost(content.value)
 
+        //get ids of users liked
+        cardPost.getIdsOfLikes()
+        
+        //check if user is liked and check if saved the post   
+        cardPost.checkLikeAndSave()
+
         //get categories
         cardPost.getCategories()
 
         //get posts to read next
         cardPost.getPosts()
-
-        //get ids of users liked
-        cardPost.getIdsOfLikes()
-
-        //check if user is like
-        for(var btnOfLike of [btnLike, cardPost.btnLikeMobile]){
-            cardPost.checkLikeOfUser(btnOfLike)
-        }
-
-        //check if user is save
-        cardPost.checkPostSaveOfUser()
-
-        //event listener on the buttons like and save
-        for (var eventType of ['mouseout', 'mouseover']) {
-            btns.forEach(btn => {
-                btn.addEventListener(eventType, cardPost.hoverEffectBtns)
-            })
-        }
 
         //event listener - button like post
         btnLike.addEventListener('click', cardPost.setLike)
@@ -308,6 +304,7 @@ const cardPost = {
         
         //event listener - button save post
         btnSave.addEventListener('click', cardPost.setSave)
+        cardPost.btnSaveMobile.addEventListener('click', cardPost.setSave)
 
     }
 }
