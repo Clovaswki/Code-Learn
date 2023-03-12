@@ -28,7 +28,7 @@ var btnShowPosts = `
     </button>
 `
 
-var profile = {
+const profile = {
 
     random: function(array, data) {
         
@@ -102,7 +102,7 @@ var profile = {
     },
 
     getPostsCreatedByuser: async function(){
-        var param = id
+        const param = id
         try {
             var response = await requestAPI.get('/get-postsByUser/'+param)
             
@@ -133,7 +133,7 @@ var profile = {
                     postId: _id,
                     date: createdAt
                 }
-                cardInjectPosts.innerHTML += postComponent(data)
+                cardInjectPosts.innerHTML += postComponent.cardComponent(data)
             })
         
     },

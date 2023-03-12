@@ -16,7 +16,18 @@
             </div>
         </div>
         <div class="lineDivider"></div>
-        <img id="btnSavePost" src="/img/btnSave.svg" alt="markPost">
+        
+        <div style="z-index: 1000;">
+            <img 
+                id="btnSavePost" 
+                src="/img/btnSave.svg" 
+                alt="markPost"
+                onload="postComponent.checkPostIsSaved(this)"
+                onclick="postComponent.savePost(this)"
+            >
+            <input type="hidden" value="{{_id}}">
+        </div>
+        
         <input type="hidden" value="{{createdAt}}">
     </div>
 </a>

@@ -1,4 +1,4 @@
-<div class="postHomePage">
+<div class="postHomePage" style="position: relative;">
     <div class="userInfo-postHomePage">
         <img src="data:image/jpg;base64,{{user.file}}" alt="user">
         <div>
@@ -27,4 +27,16 @@
         <p class="m-0 lead cardDate-postHomePage" style="font-size: 14px;"></p>
     </div>
     <input type="hidden" value="{{createdAt}}">
+
+        <div class="iconSavePostHomePage" style="cursor: pointer;">
+            <img 
+                src="/img/btnSave.svg" 
+                alt="iconMarked" 
+                style="width: 25px; height: 25px; position: absolute; top: 10%; right: 3%"
+                id="btnSavePost"
+                onclick="postComponent.savePost(this)"
+            >
+            <input type="hidden" value="{{_id}}">
+        </div>
+
 </div>

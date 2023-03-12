@@ -1,246 +1,40 @@
-//scope
-var navEdit = document.getElementById('navEdit')//nav edit
-var navPreview = document.getElementById('navPreview')//nav preview
-var preview = document.getElementsByClassName('body-paragraphs')[0]
-var headerPreview = document.getElementById('titlePreview')
-var input = document.getElementsByName('content')[0]
-var caretPos = 0
 
-var descriptionPost = document.getElementsByName('description')[0]
-var slugPost = document.getElementsByName('slug')[0]
-var titlePost = document.getElementById('inputTitle')
+class CreatePost {
 
-var btnPublish = [...document.getElementsByClassName('btnPublish')]
-var btnRevert = document.getElementById('btnRevert')
+    //scope
+    navEdit = document.getElementById('navEdit')//nav edit
+    navPreview = document.getElementById('navPreview')//nav preview
+    preview = document.getElementsByClassName('body-paragraphs')[0]
+    headerPreview = document.getElementById('titlePreview')
+    input = document.querySelector('[name="content"]')
 
-var post_finalResult = ''
+    caretPos = 0
 
-//btn close create post card
-var closeCreatePost = document.getElementById('close-createPost')
+    descriptionPost = document.querySelector('[name="description"]')
+    titlePost = document.getElementById('inputTitle')
 
+    btnPublish = [...document.getElementsByClassName('btnPublish')]
+    btnRevert = document.getElementById('btnRevert')
 
-function selectComponentByNavs() {
+    post_finalResult = ''
 
-    var bodyCreatePost = document.querySelector('.body-createPost')//card create and edit a new post
-    var previewCreatePost = document.querySelector('.preview-createPost')//card show results
+    //btn close create post card
+    closeCreatePost = document.getElementById('close-createPost')
 
-    var navs = [navEdit, navPreview]
+    //manipulation of categories
+    cardCategoriesChoosed = document.getElementById('all-categoriesChoosed')
+    selectCategories = document.getElementById('selectCategories')
+    options = [...document.querySelectorAll('.selectCategories option')]
+    allCategories = []
+    btnRemove = document.getElementById('removeCategories')
 
-    navs.forEach(nav => {
-
-        nav.addEventListener('click', (event) => {
-
-            var otherNav = navs.find(n => n != event.target)
-            event.target.classList.add('nav-active')//active nav press
-            otherNav.classList.remove('nav-active')//disable other nav
-
-            bodyCreatePost.style.display = nav.id == "navEdit" ? 'flex' : 'none'
-            previewCreatePost.style.display = nav.id == "navEdit" ? 'none' : 'flex'
-
-        })
-
-    })
-}
-selectComponentByNavs()
-
-
-//update position of mouse cursor in input
-for (var eventType of ['keyup', 'click']) {
-    input.addEventListener(eventType, e => {
-        caretPos = e.target.selectionStart
-       // console.log(caretPos)
-        convertPost(input.value)
-    })
-}
-
-function formatPostByTools() {
-
-    var bold = document.getElementById('bold'),
-        italic = document.getElementById('italic'),
-        link = document.getElementById('link'),
-        codeBlock = document.getElementById('codeBlock'),
-        quote = document.getElementById('quote')
-
-    var tools = [bold, italic, link, codeBlock, quote]
-
-    tools.forEach(tool => {
-
-        tool.addEventListener('click', event => {
-
-            var text = input.value.split('')
-
-            switch (tool.id) {
-                case 'bold':
-                    for (var index in text) {
-                        if (index - 1 == caretPos - 1) {
-                            text[index] = `**${text[index]}`
-                        }else if(caretPos == text.length){
-                            text = [...text, '**']
-                        }
-                    }
-                    break
-                case 'italic':
-                    for (var index in text) {
-                        if (index - 1 == caretPos - 1) {
-                            text[index] = `__${text[index]}`
-                        }else if(caretPos == text.length){
-                            text = [...text, '__']
-                        }
-                    }
-                    break
-                case 'link':
-                    for (var index in text) {
-                        if (index - 1 == caretPos - 1) {
-                            text[index] = `++${text[index]}`
-                            
-                            for(var i=index; i<text.length; i++){
-                                if(text[i] == ' ') {
-                                    text[i] = `[link]++ ` 
-                                    break
-                                }
-                            }
-
-                            break
-                        }
-                    }
-                    break
-                case 'codeBlock':
-                    for (var index in text) {
-                        if (index - 1 == caretPos - 1) {
-                            text[index] = "\`\`" + text[index]
-                        }else if(caretPos == text.length){
-                            text = [...text, "\`\`"]
-                        }
-                    }
-                    break
-                case 'quote':
-                    for (var index in text) {
-                        if (index - 1 == caretPos - 1) {
-                            text[index] = `>>${text[index]}`
-                        }
-                    }
-                    break
-            }
-
-            input.value = `${text.join('')}`
-            convertPost(input.value)
-        })
-
-
-    })
-
-}
-formatPostByTools()
-
-//formating post by specials characters  
-const convertPost = (text) => {
-    preview.innerHTML = ''
-
-    headerPreview.innerHTML = document.getElementById('inputTitle').value
-
-    post_finalResult = text
-
-    var paragraphs_suite1 = text.split('\r\n\r\n')
-    var paragraph_suite2 = text.split('\n\n')
-    var paragraphs = []
-
-    if (paragraph_suite2.length != paragraphs_suite1.length) {
-        paragraphs = paragraph_suite2 > paragraphs_suite1 ?
-            paragraph_suite2 :
-            paragraphs_suite1
-    }//gambiarra
-    
-    if(paragraphs.length == 0){
-        preview.innerHTML += `<p class="m-0">${checkFormat(text)}</p>`
-    }else{
-        paragraphs.forEach(paragraph => {
-    
-            var format = checkFormat(paragraph)
-    
-            if (typeof format == 'object') {
-                return preview.appendChild(format)
-            }
-    
-            preview.innerHTML += `<p class="m-0">${format}</p>`
-    
-        })
-    }
-
-}
-
-
-//manipulation categories on the creation of a post
-const categories = {
-    
-    cardCategoriesChoosed: document.getElementById('all-categoriesChoosed'),
-    selectCategories: document.getElementById('selectCategories'),
-    options: [...document.querySelectorAll('.selectCategories option')],
-    allCategories: [],
-    btnRemove: document.getElementById('removeCategories'),
-    
-    getCategories: async () => {
-        
-        var data = await requestAPI.get('/get-categories')
-
-        categories.allCategories = [...data]
-
-        const option = (name, value) => `<option value='${value}'>${name}</option>`    
-
-        data.forEach( category => {
-            selectCategories.innerHTML += option(category.nome, category._id)
-        })
-
-    },
-    selectCategories: () => {
-        
-        const catChoosed = (name, id) => `<span class='lead fw-light' title='${id}'>#${name}</span>`
-
-        selectCategories.addEventListener('change', event => {
-            
-            // if(categories.cardCategoriesChoosed.length)
-            var cat = categories.allCategories.find( c => c._id === event.target.value)
-
-            if(categories.cardCategoriesChoosed.childNodes.length - 1 <= 4){
-                if(!categories.cardCategoriesChoosed.innerText.includes(cat.nome)){
-                    categories.cardCategoriesChoosed.innerHTML += catChoosed(cat.nome, cat._id)
-                }
-            }
-
-        })
-
-
-    },
-    removeCategories: () => {
-
-        categories.btnRemove.addEventListener('click', () => {
-
-            categories.cardCategoriesChoosed.innerHTML = ''
-
-        })
-
-    },
-    getCategoriesChoosed: () => {
-
-        var choosed = categories.allCategories.filter( cat => 
-            categories.cardCategoriesChoosed.innerHTML.includes(cat._id)   
-        )
-
-        return choosed
-
-    }
-}
-
-categories.getCategories()
-categories.selectCategories()
-categories.removeCategories()
-
-//modal
-    var modal = document.getElementsByClassName('modalCreatePost-publish')[0]
-    var contentModal = modal.getElementsByClassName('contentModal-createPost')[0]
-    var btnModalPublish = document.getElementById('btnModalPublish')
+    //modal
+    modal = document.getElementsByClassName('modalCreatePost-publish')[0]
+    contentModal = this.modal.getElementsByClassName('contentModal-createPost')[0]
+    btnModalPublish = document.getElementById('btnModalPublish')
 
     //preload modal
-    var preloadModal = `
+    preloadModal = `
     <span id="preload-modal">
         <div class="spinner-border text-primary" role="status">
             <span class="visually-hidden">Loading...</span>
@@ -248,147 +42,401 @@ categories.removeCategories()
         <p>Publicando...</p>
     </span>
     `
+    //check if content of post is valid
+    postIsValid = false
 
-//close modal event click
-document.getElementsByClassName('btn-close')[0].addEventListener('click', () =>
-    modal.classList.toggle('showModal')
-)
+    //all data of post
+    dataOfPost = {}
 
-//check if content of post is valid
-var postIsValid = false
+    //navigation between edit card and preview card
+    selectComponentByNavs() {
+        let bodyCreatePost = document.querySelector('.body-createPost')//card create and edit a new post
+        let previewCreatePost = document.querySelector('.preview-createPost')//card show results
 
-//all data of post
-var dataOfPost = {}
+        let navs = [this.navEdit, this.navPreview]
 
-//check all data of post for before publish
-const checkPost = () => {
+        navs.forEach(nav => {
 
-    var contentPost = post_finalResult,
-        description = descriptionPost.value,
-        slug = slugPost.value,
-        categoriesChoosed = categories.getCategoriesChoosed(),
-        title = titlePost.value,
-        userId = document.getElementsByName('userId')[0].value
+            nav.addEventListener('click', (event) => {
 
-    var errors = []
+                let otherNav = navs.find(n => n != event.target)
+                event.target.classList.add('nav-active')//active nav press
+                otherNav.classList.remove('nav-active')//disable other nav
 
-    if(!contentPost || typeof contentPost == undefined || contentPost == null){
-        errors.push({error: 'Conteúdo inválido'})
-    }
-    if(!description || typeof description == undefined || description == null){
-        errors.push({error: 'Descrição inválida'})
-    }
-    if(!title || typeof title == undefined || title == null){
-        errors.push({error: 'Título inválido'})
-    }
-    if(!slug || typeof slug == undefined || slug == null){
-        errors.push({error: 'Slug inválida'})
-    }
-    if(!userId){
-        errors.push({error: 'id de usuário não encontrada'})
-    }
-    if(categoriesChoosed.length == 0){
-        errors.push({error: 'Nenhuma categoria selecionada'})
+                bodyCreatePost.style.display = nav.id == "navEdit" ? 'flex' : 'none'
+                previewCreatePost.style.display = nav.id == "navEdit" ? 'none' : 'flex'
+
+            })
+
+        })
     }
 
-    var successCard = `
+    //formatted the posts by tools of formatting 
+    formatPostByTools() {
+        var bold = document.getElementById('bold'),
+            italic = document.getElementById('italic'),
+            link = document.getElementById('link'),
+            codeBlock = document.getElementById('codeBlock'),
+            quote = document.getElementById('quote')
+
+        let tools = [bold, italic, link, codeBlock, quote]
+
+        tools.forEach(tool => {
+
+            tool.addEventListener('click', event => {
+
+                let text = this.input.value.split('')
+
+                switch (tool.id) {
+                    case 'bold':
+                        for (let index in text) {
+                            if (index - 1 == this.caretPos - 1) {
+                                text[index] = `**${text[index]}`
+                            } else if (this.caretPos == text.length) {
+                                text = [...text, '**']
+                            }
+                        }
+                        break
+                    case 'italic':
+                        for (let index in text) {
+                            if (index - 1 == this.caretPos - 1) {
+                                text[index] = `__${text[index]}`
+                            } else if (this.caretPos == text.length) {
+                                text = [...text, '__']
+                            }
+                        }
+                        break
+                    case 'link':
+                        for (let index in text) {
+                            if (index - 1 == this.caretPos - 1) {
+                                text[index] = `++${text[index]}`
+
+                                for (let i = index; i < text.length; i++) {
+                                    if (text[i] == ' ' || i == text.length - 1) {
+
+                                        i == text.length - 1
+                                            ? text[i] += `[link]++ `
+                                            : text[i] = `[link]++ `
+
+                                        break
+                                    }
+                                }
+
+                                break
+                            }
+                        }
+                        break
+                    case 'codeBlock':
+                        for (let index in text) {
+                            if (index - 1 == this.caretPos - 1) {
+                                text[index] = "\`\`" + text[index]
+                            } else if (this.caretPos == text.length) {
+                                text = [...text, "\`\`"]
+                            }
+                        }
+                        break
+                    case 'quote':
+                        for (let index in text) {
+                            if (index - 1 == this.caretPos - 1) {
+                                text[index] = `>>${text[index]}`
+                            }
+                        }
+                        break
+                }
+
+                this.input.value = `${text.join('')}`
+                this.convertPost(this.input.value)
+            })
+
+
+        })
+    }
+
+    //formating post by specials characters  
+    convertPost(text) {
+        // Limpa a área de visualização
+        this.preview.innerHTML = '';
+
+        // Define o cabeçalho da postagem na área de visualização do cabeçalho
+        const inputTitle = document.getElementById('inputTitle').value;
+        this.headerPreview.innerHTML = inputTitle;
+
+        // Armazena o texto original da postagem
+        this.post_finalResult = text;
+
+        // Divide o conteúdo da postagem em parágrafos
+        const paragraphs = text.split(/\r?\n\r?\n/);
+
+        // Formata e exibe cada parágrafo na área de visualização
+        paragraphs.forEach(paragraph => {
+            const formattedParagraph = checkFormat(paragraph);
+            if (typeof formattedParagraph === 'object') {
+                // Se checkFormat() retornar um objeto, adiciona esse objeto à área de visualização
+                this.preview.appendChild(formattedParagraph);
+            } else {
+                // Se checkFormat() retornar uma string, adiciona um parágrafo formatado contendo essa string à área de visualização
+                const formattedHtml = `<p class="m-0">${formattedParagraph}</p>`;
+                this.preview.innerHTML += formattedHtml;
+            }
+        });
+    }
+
+    //manipulation categories on the creation of a post
+    async getCategories() {
+
+        let data = await requestAPI.get('/get-categories')
+
+        this.allCategories = [...data]
+
+        const option = (name, value) => `<option value='${value}'>${name}</option>`
+
+        data.forEach(category => {
+            this.selectCategories.innerHTML += option(category.nome, category._id)
+        })
+
+    }
+    methodSelectCategories() {
+
+        const colors = [
+            "#e0766e", "#a6eb8f", "#56a1b3", "#a470db", "#e30535"
+        ]
+
+        const randomColor = () => colors[Math.floor(Math.random() * colors.length)]
+
+        const catChoosed = (name, id) =>
+            `<span class='lead fw-light cardCategoryChoosed' title='${id}'>
+            <p style="color: ${randomColor()}; margin: 0">#</p>
+            ${name}
+        </span>`
+
+        this.selectCategories.addEventListener('change', event => {
+
+            let cat = this.allCategories.find(c => c._id === event.target.value)
+
+            if (this.cardCategoriesChoosed.childNodes.length - 1 <= 4) {
+                if (!this.cardCategoriesChoosed.innerText.includes(cat.nome)) {
+                    this.cardCategoriesChoosed.innerHTML += catChoosed(cat.nome, cat._id)
+
+                    this.addListenerInCategories()
+                }
+            }
+
+        })
+
+    }
+
+    //add click listeners to selected categories
+    addListenerInCategories(){
+        this.cardCategoriesChoosed.childNodes.forEach( cardCategory => {
+            cardCategory.addEventListener("click", event => this.removeCategories(event))
+        })
+    }
+
+    removeCategories(event) {
+
+        if (event) {
+            this.cardCategoriesChoosed.removeChild(event.target)
+        } else {
+
+            this.btnRemove.addEventListener('click', () => {
+
+                this.cardCategoriesChoosed.innerHTML = ''
+
+            })
+        }
+
+    }
+    getCategoriesChoosed() {
+
+        let choosed = this.allCategories.filter(cat =>
+            this.cardCategoriesChoosed.innerHTML.includes(cat._id)
+        )
+
+        return choosed
+
+    }
+
+    //formatting post slug
+    formattingSlug(slug) {
+
+        let formattedSlug = slug.split(" ")
+
+        for (let i = 0; i < formattedSlug.length; i++) {
+            if (i != formattedSlug.length - 1) {
+                formattedSlug[i] += "-"
+            }
+        }
+
+        return `${formattedSlug.join("").toLowerCase().trim()}`
+
+    }
+
+    //check all data of post for before publish
+    checkPost(This) {
+
+        let contentPost = This.post_finalResult,
+            description = This.descriptionPost.value,
+            slug = This.formattingSlug(This.titlePost.value),
+            categoriesChoosed = This.getCategoriesChoosed(),
+            title = This.titlePost.value,
+            userId = document.getElementsByName('userId')[0].value
+
+        let errors = []
+
+        if (!contentPost || typeof contentPost == undefined || contentPost == null) {
+            errors.push({ error: 'Conteúdo inválido' })
+        }
+        if (!description || typeof description == undefined || description == null) {
+            errors.push({ error: 'Descrição inválida' })
+        }
+        if (!title || typeof title == undefined || title == null) {
+            errors.push({ error: 'Título inválido' })
+        }
+        if (!slug || typeof slug == undefined || slug == null) {
+            errors.push({ error: 'Slug inválida' })
+        }
+        if (!userId) {
+            errors.push({ error: 'id de usuário não encontrada' })
+        }
+        if (categoriesChoosed.length == 0) {
+            errors.push({ error: 'Nenhuma categoria selecionada' })
+        }
+
+        let successCard = `
         <div class="success-publish" >
             <img src="/img/ok.png" alt="ok" width="50px" height="50px">
             <p>Tudo pronto para publicar</p>
         </div>
-    `
+        `
 
-    const divAlert = (error) => `<div class="alert alert-danger" role="alert">${error}</div>`
+        const divAlert = (error) => `<div class="alert alert-danger" role="alert">${error}</div>`
 
-    if(errors.length > 0){
+        if (errors.length > 0) {
 
-        postIsValid = false
+            This.postIsValid = false
 
-        contentModal.innerHTML = ''
-        
-        errors.forEach( error => {
-            contentModal.innerHTML += divAlert(error.error)
-        })
-        
-        //btn publish disabled
-        btnModalPublish.disabled = true
-        
-        modal.classList.toggle('showModal')
-    }else{
-        postIsValid = true
-        
-        dataOfPost = {
-            title,
-            slug,
-            content: contentPost,
-            description,
-            userId,
-            categoriesChoosed
+            This.contentModal.innerHTML = ''
+
+            errors.forEach(error => {
+                This.contentModal.innerHTML += divAlert(error.error)
+            })
+
+            //btn publish disabled
+            This.btnModalPublish.disabled = true
+
+            This.modal.classList.toggle('showModal')
+        } else {
+            This.postIsValid = true
+
+            This.dataOfPost = {
+                title,
+                slug,
+                content: contentPost,
+                description,
+                userId,
+                categoriesChoosed
+            }
+
+            This.contentModal.innerHTML = successCard
+
+            //btn publish enabled
+            This.btnModalPublish.removeAttribute('disabled')
+
+            This.modal.classList.toggle('showModal')
         }
-        
-        contentModal.innerHTML = successCard
-        
-        //btn publish enabled
-        btnModalPublish.removeAttribute('disabled')
-        
-        modal.classList.toggle('showModal')
+
     }
 
-}
+    //set none all fields of create post card
+    setNoneAllFields(This) {
+        This.input.value = ''
+        This.preview.innerHTML = ''
+        This.titlePost.value = ''
+        This.descriptionPost.value = ''
+        This.cardCategoriesChoosed.innerHTML = ''
+    }
 
-btnPublish.forEach( btn => btn.addEventListener('click', checkPost))
+    //publish post = send to database by api 
+    async publishPost(This) {
 
-//set none all fields of create post card
-const setNoneAllFields = () => {
-    input.value = ''
-    preview.innerHTML = ''
-    titlePost.value = ''
-    slugPost.value = ''
-    descriptionPost.value = ''
-    categories.cardCategoriesChoosed.innerHTML = ''
-}
+        //active preload modal
+        This.contentModal.innerHTML = This.preloadModal
 
-//publish post = send to database by api 
-const publishPost = async () =>{
+        if (this.postIsValid) {
 
-    //active preload modal
-    contentModal.innerHTML = preloadModal
+            try {
+                await requestAPI.post('/send-post', This.dataOfPost)
 
-    if(postIsValid){
-        
-        try {
-            var response = await requestAPI.post('/send-post', dataOfPost)
+                //set none all fields
+                This.setNoneAllFields(this)
 
-            //set none all fields
-            setNoneAllFields()
-
-            contentModal.innerHTML = `
+                This.contentModal.innerHTML = `
                 <div class="d-flex flex-column justify-content-center align-items-center gap-3 h-100">
                     <img src="/img/success.png" alt="success" width="30px" height="30px"/>
                     <p class="m-0 lead">Publicado com sucesso</p>
                 </div>
             `
 
-        } catch (error) {
+            } catch (error) {
 
-            contentModal.innerHTML = `
+                This.contentModal.innerHTML = `
                 <div class="d-flex flex-column justify-content-center align-items-center gap-3 h-100">
                     <img src="/img/error.png" alt="success" width="30px" height="30px"/>
                     <p class="m-0 lead">Erro na publicação</p>
                 </div>
             `
 
-            console.log(error)
+                console.log(error)
+            }
+
         }
+
+    }
+
+    init() {
+
+        this.selectComponentByNavs()
+
+        this.formatPostByTools()
+
+        //categories functions instances
+        this.getCategories()
+        this.methodSelectCategories()
+        this.removeCategories()
+
+        //close modal event click
+        document.getElementsByClassName('btn-close')[0].addEventListener('click', () =>
+            this.modal.classList.toggle('showModal')
+        )
+
+        //events click buttons of publish
+        this.btnPublish.forEach(btn => btn.addEventListener('click', () => this.checkPost(this)))
+
+        //update position of mouse cursor in input
+        for (let eventType of ['keyup', 'click']) {
+            this.input.addEventListener(eventType, e => {
+                this.caretPos = e.target.selectionStart
+                // console.log(caretPos)
+                this.convertPost(this.input.value)
+            })
+            this.titlePost.addEventListener(eventType, e => {
+                this.convertPost(this.input.value)
+            })
+        }
+
+        //listener click publish button in the modal
+        this.btnModalPublish.addEventListener('click', () => this.publishPost(this))
+
+        //revert content modal post
+        this.btnRevert.addEventListener('click', () => this.setNoneAllFields(this))
+
+        //close create post
+        this.closeCreatePost.addEventListener('click', () => location.href = '/')
 
     }
 
 }
 
-btnModalPublish.addEventListener('click', publishPost)
+const createPost = new CreatePost()
 
-//revert content modal post
-btnRevert.addEventListener('click', setNoneAllFields)
-
-//close create post
-closeCreatePost.addEventListener('click', () => location.href = '/')
+createPost.init()

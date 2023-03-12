@@ -12,13 +12,17 @@ const {
     getPost,
     setLikePost,
     setSavePost,
-    getPostsByUser
+    getPostsByUser,
+    getManyPost
 } = require('../controllers/postController')
 
 //controllers auth
 const { checkAuth } = require('../controllers/authController')
     
-//categories
+//helpers
+const { userAuth } = require('../helpers/helpers')
+    //categories
+
         //get all categories
         router.get('/get-categories', getCategories)
 
@@ -28,6 +32,9 @@ const { checkAuth } = require('../controllers/authController')
 
         //get all posts
         router.get('/get-allposts', getPost)
+
+        //get many posts
+        router.get('/get-many-posts', userAuth, getManyPost)
 
         //set like
         router.get('/set-like', setLikePost)

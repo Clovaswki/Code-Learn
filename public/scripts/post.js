@@ -200,17 +200,17 @@ const cardPost = {
             
             this.postsReadNext.innerHTML = ''
 
-            var limitPosts = 4
+            const limitPosts = 5
 
             posts = randomItems(posts, limitPosts)
             
             if(posts || posts.length > 0){
-                for(var i = 0; i < limitPosts; i++){    
-                    var { _id, user, title, createdAt } = posts[i]
+                for(let i = 0; i < limitPosts; i++){    
+                    const { _id, user, title, createdAt } = posts[i]
 
-                    var format = formatDate(createdAt).split('/')
+                    let format = formatDate(createdAt).split('/')
 
-                    var date = `${format[2]}, ${format[0]} de ${this.months[format[1]]}`
+                    let date = `${format[2]}, ${format[0]} de ${this.months[parseInt(format[1])]}`
 
                     this.postsReadNext.innerHTML += this.postReadNext(_id, title, user.file, user.nome, date)
                 }
@@ -224,20 +224,12 @@ const cardPost = {
 
     //formating post content accords specials characters
     formatingContentPost: (text) => {
-        //gambiarra
-        var paragraphs_suite1 = text.split('\r\n\r\n')
-        var paragraph_suite2 = text.split('\n\n')
-        var paragraphs = []
 
-        if (paragraph_suite2.length != paragraphs_suite1.length) {
-            paragraphs = paragraph_suite2 > paragraphs_suite1 ?
-                paragraph_suite2 :
-                paragraphs_suite1
-        }//gambiarra
+        const paragraphs = text.split(/\r?\n\r?\n/);
 
         paragraphs.forEach(paragraph => {
 
-            var format = checkFormat(paragraph)
+            const format = checkFormat(paragraph)
 
             if (typeof format == 'object') {
                 return bodyPost.appendChild(format)

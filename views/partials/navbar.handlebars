@@ -13,7 +13,8 @@
           {{#if userAuth}}
           <a href="/perfil" style="text-decoration: none;">
             <div class="d-flex btnProfile">
-              <img id="imgNavbarUser" src="data:image/jpg;base64,{{user.file}}" alt="user" width="40px" height="40px" class="rounded-circle" style="object-fit: cover;">
+              <img id="imgNavbarUser" src="data:image/jpg;base64,{{user.file}}" alt="user" width="40px" height="40px"
+                class="rounded-circle" style="object-fit: cover;">
               <p class="text-white my-auto nav-link fw-bold">Olá, {{user.nome}}</p>
             </div>
           </a>
@@ -25,19 +26,13 @@
           {{else}}
           <a class="nav-link btn btn-success text-white" aria-current="page" href="/login">Faça o seu login</a>
           {{/if}}
-          
+
           <span class="nav-component">
-            <a class="nav-link text-white" href="/categories">Categorias</a>  
+            <a class="nav-link text-white" href="/categories">Categorias</a>
             <div class="line"></div>
           </span>
-          {{#if user.adm}}
-          <span class="nav-component">
-            <a class="nav-link text-white" href="/admin/home">Admin</a>
-            <div class="line"></div>
-          </span>
-          {{/if}}
           {{#if userAuth}}
-          <a class="nav-link text-white btn btn-danger nav-component" href="/logout">Sair</a>
+            {{>dropdownNavbar}}
           {{/if}}
         </div>
       </div>
@@ -46,36 +41,38 @@
 </nav>
 
 <style>
-  #imgNavbarUser{
+  #imgNavbarUser {
     outline: 2px solid rgb(105, 65, 179, .3);
     outline-offset: 2px;
   }
 </style>
 
- <!--media queries-->
-    <div class="navMedia bg-dark"  style="z-index: 1000;">
-      <ul class="btnsNav">
-        {{#if userAuth}}
-        <a href="/perfil" style="text-decoration: none;">
-          <div class="d-flex mb-3">
-            <img src="data:image/jpg;base64,{{user.file}}" alt="user" width="45px" height="45px" class="rounded-circle">
-            <!--<img class="" src="/img/user.png" width="45px" alt="{{user.nome}}">-->
-            <p class="text-white my-auto nav-link fw-bold">Olá, {{user.nome}}</p>
-          </div>
-        </a>
-        {{else}}
-        <li><a href="/login" class="fw-bold">Faça o seu login</a></li>
-        {{/if}}
-        <li><a href="/categories" class="fw-bold">Categorias</a></li>
-        <li><a href="#" class="fw-bold">Informações</a></li>
-        {{#if user.adm}}
-        <li><a href="/admin/home" class="fw-bold">Admin</a></li>
-        {{/if}}
-        {{#if userAuth}}
-        <li><a href="/logout" class="fw-bold">Sair</a></li>
-        {{else}}
-        <li><a href="#" class="fw-bold">Faq</a></li>
-        {{/if}}
-      </ul>
-    </div>
+<!--media queries-->
+<div class="navMedia bg-dark" style="z-index: 1000;">
+  <ul class="btnsNav">
+    {{#if userAuth}}
+    <a href="/perfil" style="text-decoration: none;">
+      <div class="d-flex mb-3">
+        <img src="data:image/jpg;base64,{{user.file}}" alt="user" width="45px" height="45px" class="rounded-circle">
+        <!--<img class="" src="/img/user.png" width="45px" alt="{{user.nome}}">-->
+        <p class="text-white my-auto nav-link fw-bold">Olá, {{user.nome}}</p>
+      </div>
+    </a>
+    {{else}}
+    <li><a href="/login" class="fw-bold">Faça o seu login</a></li>
+    {{/if}}
+    <li><a href="/categories" class="fw-bold">Categorias</a></li>
+    {{#if userAuth}}
+    <li type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight">
+      <a href="#" class="fw-bold" id="btnOffcanvasMobile">salvos</a>
+    </li>
+    {{/if}}
+    {{#if user.adm}}
+    <li><a href="/admin/home" class="fw-bold">Admin</a></li>
+    {{/if}}
+    {{#if userAuth}}
+    <li><a href="/logout" class="fw-bold">Sair</a></li>
+    {{/if}}
+  </ul>
+</div>
 <!--...-->

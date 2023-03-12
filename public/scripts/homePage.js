@@ -1,5 +1,5 @@
 
-var HomePage = {
+const HomePage = {
 
     numberPages: parseInt(document.getElementsByName('numberPages')[0].value),
     componentPagination: document.getElementById('paginationComponent'),
@@ -52,7 +52,7 @@ var HomePage = {
 
             HomePage.cardCategoriesRole.innerHTML = ''
     
-            var max = 8
+            const max = 8
     
             var categoryElement = (name, id) => `<a href="/posts/${id}" style="text-decoration: none; color: black;">
                 <p class="m-0">${name}</p>

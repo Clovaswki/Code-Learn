@@ -97,6 +97,7 @@
     justify-content: space-around;
     align-items: center;
     gap: 10px;
+    overflow-x: auto;
 }
 
 .roleCategories p {
@@ -292,18 +293,24 @@
     display: flex;
 }
 
+.artCard {
+    border-radius: 10px;
+    transition: 1s;
+    width: 90%;
+    border-radius: 10px;
+}
+.artCard:hover{
+    transform: translateY(-2%);
+}
+
 @media (max-width: 600px){
     .card2{
         padding: 0;
     }
-}
-
-.artCard {
-    border-radius: 10px;
-    transition: 1s;
-}
-.artCard:hover{
-    transform: translateY(-2%);
+    .artCard{
+        width: 100%;
+        border-radius: 0px;
+    }
 }
 
 @media (max-width: 1030px) {

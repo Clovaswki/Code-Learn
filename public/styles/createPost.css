@@ -191,6 +191,21 @@
     font-size: 16px;
     font-weight: lighter;
 }
+.cardCategoryChoosed{
+    background-color: rgb(231, 229, 229, .2);
+    display: flex;
+    justify-content: center;
+    border-radius: 5px;
+    border: 1px solid lightgray;
+    padding: 5px 2px;
+    box-shadow: 2px 2px 1px rgba(0, 0, 0, .3);
+    cursor: pointer;
+    color: black;
+}
+.cardCategoryChoosed:hover{
+    background-color: red;
+    color: #ffff;
+}
 /* more info */
 
 
@@ -255,6 +270,7 @@
     flex-direction: column;
     gap: 10px;
     height: auto;
+    overflow-y: auto;
 }
 .nav-active{
     font-weight: bold;

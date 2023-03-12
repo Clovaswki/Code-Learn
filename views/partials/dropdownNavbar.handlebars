@@ -1,0 +1,153 @@
+<div class="dropdown d-flex">
+
+    <span class="d-flex align-items-center btn-dropdown">
+        <img src="/img/navbar/dropdown-arrow.png" width="30px" height="30px">
+    </span>
+
+    <ul class="list-dropdown">
+        {{#if user.adm}}
+        <a href="/admin/home">
+            <li>
+                <span>
+                    <img src="/img/navbar/admin.svg" height="20px" width="20px" />
+                    <p class="m-0">Admin</p>
+                </span>
+            </li>
+        </a>
+        {{/if}}
+        <a href="#">
+            <li id="btn-offcanvas">
+                <span type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight">
+                    <img src="/img/navbar/save.svg" height="20px" width="20px" />
+                    <p class="m-0">salvos</p>
+                </span>
+            </li>
+        </a>
+        <a href="/logout">
+            <li id="close">
+                <span>
+                    <img src="/img/navbar/logout.svg" height="20px" width="20px" />
+                    <p class="m-0">Sair</p>
+                </span>
+            </li>
+        </a>
+    </ul>
+
+</div>
+
+<style>
+    .dropdown {
+        position: relative;
+    }
+
+    .btn-dropdown {
+        border-radius: 5px;
+        padding: 5px;
+    }
+
+    .btn-dropdown:hover {
+        transform: scale(1.1, 1.1);
+        cursor: pointer;
+        background: rgba(0, 0, 0, .3);
+    }
+
+    .list-dropdown {
+        display: none;
+        top: 50px;
+        right: 1%;
+        background-color: #ffff;
+        width: 170px;
+        position: absolute;
+        list-style: none;
+        border-radius: 7px;
+        border: 1px solid rgba(0, 0, 0, .3);
+        padding: 10px 0px;
+    }
+
+    .list-dropdown a {
+        text-decoration: none;
+        color: black;
+    }
+
+    .list-dropdown li {
+        padding: 5px 0;
+        cursor: pointer;
+    }
+
+    .list-dropdown li:hover {
+        background-color: rgba(0, 0, 0, .05);
+    }
+
+    .list-dropdown li:active {
+        background-color: rgb(101, 101, 204);
+        color: #fff;
+    }
+
+    .list-dropdown li span {
+        padding: 0px 30px;
+        display: flex;
+        gap: 1rem;
+        align-items: center;
+    }
+
+    .list-dropdown li[id=close]:hover {
+        background-color: brown;
+        color: #fff;
+    }
+
+    .list-dropdown li[id=close]:active {
+        opacity: .5;
+    }
+
+    .show-list {
+        display: block;
+    }
+</style>
+
+<script>
+
+    const dropdown = {
+        listDropdown: document.getElementsByClassName('list-dropdown')[0],
+        btnDropdown: document.getElementsByClassName('btn-dropdown')[0],
+        dropdownElement: document.querySelector(".dropdown"),
+
+        toggleDropdown: function () {
+
+            dropdown.listDropdown.classList.toggle('show-list')
+
+        },
+
+        init() {
+
+            dropdown.btnDropdown.addEventListener('click', this.toggleDropdown)
+
+            for (var eventType of ['copy', 'paste']) {
+                dropdown.btnDropdown.addEventListener(eventType, (event) => {
+
+                    event.preventDefault().focus()
+
+                })
+            }
+
+            // listener of events for hide the dropdown menu
+            document.addEventListener('click', (event) => {
+                const target = event.target;
+                const dropdownMenu = dropdown.dropdownElement
+
+                const isClickInsideDropdown = dropdownMenu.contains(target) || dropdown.btnDropdown === target;
+          
+                if (!isClickInsideDropdown) {
+                    dropdown.listDropdown.classList.remove('show-list');
+                }
+
+            });
+
+
+
+        }
+
+    }
+
+    dropdown.init()
+
+</script>

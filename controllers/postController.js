@@ -59,6 +59,21 @@ module.exports = {
         }
 
     },
+    
+    getManyPost: async (req, res) => {
+
+        var savePosts = req.user.savePosts
+        var getterPosts = []
+
+        for(var p of savePosts){
+            var post = await Post.findOne({_id: p}).populate('user')
+            getterPosts.push(post)
+        }
+
+        res.status(200).json(getterPosts)
+
+    },
+
     setLikePost: async (req, res) => {
 
         var { postId } = req.query

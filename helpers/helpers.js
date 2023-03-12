@@ -12,6 +12,16 @@ module.exports = {
             res.redirect('/')
         }
     },
+    //acess of authenticated users
+    userAuth: (req, res, next) => {
+
+        if(req.isAuthenticated()){
+            return next()
+        }else{
+            res.redirect('/')
+        }
+
+    },
     //validation primary of form login
     loginFlash: (req, res, next) => {
         if(!req.body.username && !req.body.password){

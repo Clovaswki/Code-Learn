@@ -6,3 +6,20 @@
     display: block;
 }
 */
+
+.cardImg-register{
+    height: 200px;
+    width: 100%;
+    border: 1px solid gray;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.cardImg-register img{
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 50%;
+}

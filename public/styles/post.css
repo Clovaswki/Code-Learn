@@ -18,7 +18,7 @@
 }
 
 .buttonsPostMobile span{
-    padding: .8rem;
+    padding: .2rem;
     border-radius: 4px;
 }
 .buttonsPostMobile span:hover, .buttonsPostMobile span:focus{
@@ -51,6 +51,11 @@
     width: 25px;
     height: 25px;
     opacity: .7;
+}
+
+.buttonsPost img[alt=like]:hover,
+.buttonsPost img[alt=save]:hover {
+    transform: scale(1.2, 1.2);
 }
 
 .cardPost .contentCenterPost {

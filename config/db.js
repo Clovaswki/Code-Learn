@@ -1,7 +1,5 @@
 if(process.env.NODE_ENV == 'production'){
-    module.exports = {mongoURI: "mongodb+srv://clodo:prime123@cluster0.f2p2p.mongodb.net/myFirstDatabase?retryWrites=true&w=majority"}
+    module.exports = {mongoURI: "mongodb+srv://clodaski:prime123@cluster0.zdr37a1.mongodb.net/codelearn?retryWrites=true&w=majority"}
 }else{
-    module.exports ={mongoURI: "mongodb://localhost/codelearn"}
+    module.exports ={mongoURI: "mongodb://127.0.0.1/codelearn"}
 }
-//module.exports ={mongoURI: "mongodb://localhost/codelearn"}
-// module.exports = {mongoURI: "mongodb+srv://clodo:prime123@cluster0.f2p2p.mongodb.net/myFirstDatabase?retryWrites=true&w=majority"}

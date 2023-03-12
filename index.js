@@ -39,6 +39,7 @@
         app.use(passport.initialize())
         app.use(passport.session())
         app.use(flash())
+        
     //middleware locals
         app.use(async(req, res, next) => {
             res.locals.success = req.flash('success')

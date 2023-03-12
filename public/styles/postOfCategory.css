@@ -17,6 +17,9 @@
     right: 1.5%;
     top: 5%;
 }
+#btnSavePost:hover{
+    transform: scale(1.1, 1.1);
+}
 
 .postOfCategory .contentPost{
     display: flex;

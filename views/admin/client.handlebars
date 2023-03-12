@@ -1,75 +1,84 @@
 {{>navbarAdmin}}
-<div class="container">
+<div class="p-3">
+    <div class="my-3 p-3 bg-body rounded shadow-sm d-flex gap-3">
+        <img src="/img/usersGroup.png" alt="users" width="40px" height="40px" style="opacity: .6;">
+        <input 
+            type="text" 
+            class="form-control" 
+            style="border-radius: 14px;" 
+            placeholder="Procure aqui..."
+            id="searchClientsAdm"
+        >
+    </div>
     <div class="my-3 p-3 bg-body rounded shadow-sm">
-        <div class="d-flex row p">
-            <div class="col">
-                <h6 class="pb-2 mb-0">Clientes
-                    <span class="badge bg-light text-dark rounded-pill align-text-bottom">{{categories.length}}</span>
-                </h6>
+        <div class="body-usersAdm">
+            <div class="row p-2 table-legend">
+                <span class="col-sm-1 justify-content-center d-flex">
+                    <p class="m-0 text-muted h6">#</p>
+                </span>
+                <span class="col-sm justify-content-center d-flex">
+                    <p class="m-0 text-muted h6">Usuário</p>
+                </span>
+                <span class="col-sm justify-content-center d-flex">
+                    <p class="m-0 text-muted h6">Status</p>
+                </span>
+                <span class="col-sm justify-content-center d-flex">
+                    <p class="m-0 text-muted h6">Criação</p>
+                </span>
+                <span class="col-sm justify-content-center d-flex">
+                    <p class="m-0 text-muted h6">Edit</p>
+                </span>
             </div>
-            <div class="col">
-                <form class="d-flex my-auto pb-2 mb-0 search" action="/admin/search-usuarios" method="post">
-                    <input class="form-control me-2" type="search" name="search" placeholder="Usuario" aria-label="Search">
-                    <button class="btn btn-outline-success" type="submit">buscar</button>
-                </form>
-            </div>
-        </div>
-        <hr>
-        <!--Message flash da pesquisa-->
-        {{#if searchName}}
-                <h6>Resultado da busca:
-                    <span class="badge bg-light text-dark rounded-pill align-text-bottom">{{searchName.length}}</span>
-                </h6>
-        {{#each searchName}}
-            <div class="d-flex text-muted pt-3 row bg-light p-3 " style="border-radius: 10px;">
-                <div class="d-flex col-sm-10">
-                    <img src="data:image/jpg;base64,{{file}}"  width="40px" height="40px" alt="user" class="rounded-circle">
-                    <!--<img src="/img/users.png" width="40px" height="40px" alt="user">-->
-                    <p class="pb-3 mb-0 small lh-sm ms-3">
-                        <strong class="d-block text-gray-dark">Nome: {{nome}}</strong>
-                        <strong class="d-block text-gray-dark">Sobrenome: {{sobrenome}}</strong>
-                        <strong class="d-block text-gray-dark">Email: {{email}}</strong>
-                    </p>
-                    <p>Data de cadastro: {{date}}</p>
-                    {{#if adm}}
-                    <p class="ms-2">Administrador</p>
-                    {{/if}}
+            <div class="__line__" style="height: 1px;"></div>
+            {{#each users}}
+                <div class="row p-2 userClient">
+                    <span class="col-sm-1 d-flex align-items-center justify-content-center indexUser text-muted">
+                       {{!-- inject index with script --}}
+                    </span>
+                    <span class="col-sm d-flex gap-2 align-items-center justify-content-center">
+                        <div class="d-flex gap-2" style="width: 200px">
+                            <img 
+                                src="data:image/jpg;base64,{{file}}" 
+                                alt="user" 
+                                width="40px"
+                                height="40px"
+                                style="border-radius: 14px; object-fit: cover;"
+                            >
+                            <div>
+                                <p class="m-0" style="line-height: 18px;">{{nome}}</p>
+                                <small class="text-muted">{{email}}</small>
+                            </div>
+                        </div>
+                    </span>
+                    <span class="col-sm d-flex align-items-center justify-content-center">
+                        {{#if adm}}
+                        <p class="m-0 fs-6 blockquote text-muted">Administrador</p>
+                        {{else}}
+                        <p class="m-0 fs-6 blockquote text-muted">Usuário</p>
+                        {{/if}}
+                    </span>
+                    <span class="col-sm d-flex align-items-center justify-content-center">
+                        <p class="m-0 fs-6 blockquote text-muted dateText">{{date}}</p>
+                    </span>
+                    <span class="col-sm d-flex align-items-center justify-content-center">
+                        <div class="d-flex gap-2 justify-content-between">
+                            <a href="/admin/editclientes/{{_id}}" class="btn btn-primary d-flex align-items-center">
+                                <img src="/img/edit.png" alt="edit" width="20px" height="20px">
+                            </a>
+                            <a href="#" class="btn btn-danger d-flex align-items-center">
+                                <img src="/img/remove-user.png" alt="remove" width="20px" height="20px">
+                            </a>
+                        </div>
+                    </span>
                 </div>
-                <div class="row gap-1 mt-5 col-sm-2">
-                    <a href="/admin/editclientes/{{_id}}" class="col btn btn-outline-secondary w-50">Editar</a>
-                    <a href="/admin/deleteclientes/{{_id}}" class="col btn btn-outline-danger w-50">Deletar</a>
-                </div>
-            </div>
-        <hr>
-        {{/each}}
-        {{/if}}
-        {{#if error}}
-            <h6 class="alert alert-secondary">{{error}}</h6>
-        {{/if}}
-        <!--....-->
-        {{#each users}}
-        <div class="userClient d-flex text-muted pt-3 row">
-            <div class="d-flex col-sm-10">
-                <img src="data:image/jpg;base64,{{file}}"  width="40px" height="40px" alt="user" class="rounded-circle" style="object-fit: cover;">
-                <!--<img src="/img/users.png" width="40px" height="40px" alt="user"-->
-                <p class="pb-3 mb-0 small lh-sm ms-3">
-                    <strong class="d-block text-gray-dark">Nome: {{nome}}</strong>
-                    <strong class="d-block text-gray-dark">Sobrenome: {{sobrenome}}</strong>
-                    <strong class="d-block text-gray-dark">Email: {{email}}</strong>
-                    <strong class="d-block bold">{{date}}</strong>
-                </p>
-            </div>
-            <div class="row gap-1 mt-0 col-sm-2">
-                {{#if adm}}
-                <p class="d-block bold ms-5">Administrador</p>
-                {{/if}}
-                <a href="/admin/editclientes/{{_id}}" class="col btn btn-outline-secondary mt-5 w-50">Editar</a>
-                <a href="/admin/deleteclientes/{{_id}}" class="col btn btn-outline-danger mt-5 w-50">Deletar</a>
-            </div>
+                <div class="__line__" style="height: 1px;"></div>
+            {{/each}}
         </div>
-        <hr>
-        {{else}}
-        <h4>Nenhum cliente cadastrado</h4>
-        {{/each}}
     </div>
 </div>
+
+<style>
+    .userClient:hover{
+        background-color: rgba(0, 0, 0, .03);
+    }
+</style>
